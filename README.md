@@ -1,1 +1,3 @@
-# symfony-ecom
+# Symfony-Ecom
+
+- Symfony 7
