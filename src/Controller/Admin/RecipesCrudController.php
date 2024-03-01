@@ -2,17 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Product;
+use App\Entity\Recipes;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ProductCrudController extends AbstractCrudController
+class RecipesCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Product::class;
+        return Recipes::class;
     }
 
     /*
