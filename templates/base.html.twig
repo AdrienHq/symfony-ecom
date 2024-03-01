@@ -6,33 +6,28 @@
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
     {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
     {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('app') }}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
 <body>
-{% block body %}
-
-    <h1>
-        Hello, je suis base.html.twig
-    </h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                One of three columns
-            </div>
-            <div class="col-sm">
-                One of three columns
-            </div>
-            <div class="col-sm">
-                One of three columns
+<div class="" style="background-color: darkorange; color: black;">
+    <div class="page-width">
+        <div class="d-flex">
+            <div class="announcement-banner text-center">
+                <p class="text-center">
+                    <strong>Join our newsletter to get everything !!!</strong>
+                </p>
             </div>
         </div>
     </div>
+</div>
+
+{% block body %}
 {% endblock %}
 <script src="{{ asset('build/bootstrap.js') }}"></script>
 </body>
