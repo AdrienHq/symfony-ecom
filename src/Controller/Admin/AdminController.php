@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Product;
+use App\Entity\Recipes;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -23,15 +23,15 @@ class AdminController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Symfony Ecom ADMIN');
+            ->setTitle('Symfony Project ADMIN');
     }
 
     public function configureMenuItems(): iterable
     {
         return [
             MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-            MenuItem::section('Products'),
-            MenuItem::linkToCrud('Product', 'fa fa-comment', Product::class),
+            MenuItem::section('Recipes'),
+            MenuItem::linkToCrud('Recipe', 'fa fa-comment', Recipes::class),
         ];
 
     }
