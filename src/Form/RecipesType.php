@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Recipes;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,14 +14,16 @@ class RecipesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class,[
+                'label' => 'Name'
+            ])
             ->add('content')
             ->add('description')
             ->add('questions')
             ->add('recipeSteps')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('slug')
+            ->add('save', SubmitType::class,[
+                'label' => 'Save'
+            ])
         ;
     }
 
