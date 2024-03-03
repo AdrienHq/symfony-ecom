@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
                            href="{{ path('admin') }}">Admin home</a>
@@ -40,12 +40,8 @@
                         <a class="nav-link {{ app.request.attributes.get('_route') == 'admin.recipes.index' ? 'active' : '' }}"
                            href="{{ path('admin.recipes.index') }}">Recettes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'index' ? 'active' : '' }}"
-                           href="{{ path('index') }}">Go back to the main site</a>
-                    </li>
                 </ul>
-                <ul class="navbar-nav ml-auto">
+                <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link {{ app.request.attributes.get('_route') == 'index' ? 'active' : '' }}"
                            href="{{ path('index') }}">Go back home</a>

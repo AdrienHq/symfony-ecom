@@ -2,8 +2,6 @@
 
 {% block body %}
     <div>
-
-
         <table class="table">
             <thead>
             <tr>
@@ -20,10 +18,18 @@
                     <td>{{ recipe.getId() }}</td>
                     <td>{{ recipe.getName() }}</td>
                     <td>{{ recipe.getCreatedAt()|date("d/m/Y") }}</td>
+                    <td>
+                        <a class="btn btn-primary"
+                           href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">Link to the
+                            recipe</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="{{ path('admin.recipes.edit', {id: recipe.id} ) }}">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="{{ path('admin.recipes.edit', {id: recipe.id} ) }}">Delete</a>
+                    </td>
                 </tr>
-                <li>
-                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">{{ recipe.getName() }}</a>
-                </li>
             {% endfor %}
             </tbody>
         </table>
