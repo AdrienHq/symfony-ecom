@@ -22,23 +22,43 @@ class RecipesAdminController extends AbstractController
     #[Route('/', name: 'index')]
     public function index()
     {
-        return $this->render("/admin/recipes/recipes.html.twig",[
+        return $this->render("/admin/recipes/recipes.html.twig", [
             'recipes' => $this->recipesRepository->findAll()
         ]);
     }
 
     #[Route('[/{id}/edit', name: 'edit')]
-    public function edit(Recipes $recipe,Request $request, EntityManagerInterface $em)
+    public function edit(Recipes $recipe, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(RecipesType::class, $recipe);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
             $this->addFlash('success', 'The recipe has been edited');
             return $this->redirectToRoute('admin.recipes.index');
         }
         return $this->render('admin/recipes/edit.html.twig', [
             'recipe' => $recipe,
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/create', name: 'create')]
+    public function create(Request $request, EntityManagerInterface $em)
+    {
+        $recipe = new Recipes();
+        $form = $this->createForm(RecipesType::class, $recipe);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setCreatedAt(new \DateTimeImmutable());
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($recipe);
+            $em->flush();
+            $this->addFlash('success', 'New recipes created');
+            return $this->redirectToRoute('admin.recipes.index');
+        }
+        return $this->render('admin/recipes/create.html.twig', [
             'form' => $form
         ]);
     }
