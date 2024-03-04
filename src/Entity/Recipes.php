@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\RecipesRepository;
+use App\Validator\Entry;
+use App\Validator\Sanitizer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipesRepository::class)]
+#[UniqueEntity('name')]
+#[UniqueEntity('slug')]
 class Recipes
 {
     #[ORM\Id]
@@ -16,20 +21,26 @@ class Recipes
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 5)]
-    private ?string $name = null;
+    #[Assert\Length(min: 4)]
+    #[Assert\NotBlank()]
+    #[Sanitizer()]
+    private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $content = null;
+    #[Sanitizer()]
+    private string $content = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    #[Sanitizer()]
+    private string $description = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $questions = null;
+    #[Sanitizer()]
+    private string $questions = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $recipeSteps = null;
+    #[Sanitizer()]
+    private string $recipeSteps = '';
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -41,6 +52,8 @@ class Recipes
     private ?string $slug = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Positive()]
+    #[Assert\GreaterThan(300)]
     private ?int $duration = 0;
 
     public function getId(): ?int
@@ -48,7 +61,7 @@ class Recipes
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -60,48 +73,48 @@ class Recipes
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent(?string $content): static
+    public function setContent(string $content): static
     {
         $this->content = $content;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(string $description): static
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getRecipeSteps(): ?string
+    public function getRecipeSteps(): string
     {
         return $this->recipeSteps;
     }
 
-    public function setRecipeSteps(?string $recipeSteps): static
+    public function setRecipeSteps(string $recipeSteps): static
     {
         $this->recipeSteps = $recipeSteps;
 
         return $this;
     }
 
-    public function getQuestions(): ?string
+    public function getQuestions(): string
     {
         return $this->questions;
     }
 
-    public function setQuestions(?string $questions): static
+    public function setQuestions(string $questions): static
     {
         $this->questions = $questions;
 

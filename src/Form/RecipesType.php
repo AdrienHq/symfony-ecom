@@ -9,6 +9,7 @@ use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
@@ -23,10 +24,18 @@ class RecipesType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Name'
             ])
-            ->add('content')
-            ->add('description')
-            ->add('questions')
-            ->add('recipeSteps')
+            ->add('content', TextareaType::class, [
+                'empty_data' => ''
+            ])
+            ->add('description', TextareaType::class, [
+                'empty_data' => ''
+            ])
+            ->add('questions', TextareaType::class, [
+                'empty_data' => ''
+            ])
+            ->add('recipeSteps', TextareaType::class, [
+                'empty_data' => ''
+            ])
             ->add('duration', IntegerType::class, [
                 'label' => 'Duration of the recipe (in minutes)',
                 'empty_data' => '0'
