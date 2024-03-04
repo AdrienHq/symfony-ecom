@@ -11,6 +11,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
+                <th scope="col">Duration</th>
                 <th scope="col">Creation Date</th>
                 <th scope="col">Last Update</th>
                 <th scope="col">Action</th>
@@ -22,6 +23,7 @@
                     <td>{{ loop.index }}</td>
                     <td>{{ recipe.getId() }}</td>
                     <td>{{ recipe.getName() }}</td>
+                    <td>{{ recipe.getDuration() }}</td>
                     <td>{{ recipe.getCreatedAt()|date("d/m/Y") }}</td>
                     <td>{{ recipe.getUpdatedAt()|date("d/m/Y") }}</td>
                     <td>

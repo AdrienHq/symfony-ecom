@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RecipesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipesRepository::class)]
 class Recipes
@@ -15,6 +16,7 @@ class Recipes
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 5)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -37,6 +39,9 @@ class Recipes
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = 0;
 
     public function getId(): ?int
     {
@@ -135,6 +140,18 @@ class Recipes
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): static
+    {
+        $this->duration = $duration;
 
         return $this;
     }
