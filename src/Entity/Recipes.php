@@ -55,7 +55,6 @@ class Recipes
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
-    #[Assert\GreaterThan(300)]
     private ?int $duration = 0;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'recipes')]

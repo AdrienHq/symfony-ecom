@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Recipes;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
@@ -39,6 +41,11 @@ class RecipesType extends AbstractType
             ->add('duration', IntegerType::class, [
                 'label' => 'Duration of the recipe (in minutes)',
                 'empty_data' => '0'
+            ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
             ])
             ->add('slug', TextType::class, [
                 'required' => false
