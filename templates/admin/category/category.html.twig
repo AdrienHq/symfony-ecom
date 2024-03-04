@@ -1,0 +1,46 @@
+{% extends "/admin/admin.html.twig" %}
+
+{% block body %}
+    <p>
+        <a class="btn btn-success btn-sm" href="{{ path('admin.category.create') }}">Create</a>
+    </p>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Creation Date</th>
+                <th scope="col">Last Update</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ category.getId() }}</td>
+                    <td>{{ category.getName() }}</td>
+                    <td>{{ category.getCreatedAt()|date("d/m/Y") }}</td>
+                    <td>{{ category.getUpdatedAt()|date("d/m/Y") }}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-warning btn-sm"
+                               href="{{ path('admin.category.edit', {id: category.id} ) }}">Edit</a>
+                            <form action="{{ path('admin.category.delete', {id: category.id} ) }}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
