@@ -55,7 +55,7 @@ class Course
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes->add($recipe);
-            $recipe->setCourse($this);
+            $recipe->addCourse($this);
         }
 
         return $this;
@@ -63,11 +63,16 @@ class Course
 
     public function removeRecipe(Recipes $recipe): static
     {
+//        if ($this->recipes->removeElement($recipe)) {
+//            // set the owning side to null (unless already changed)
+//            if ($recipe->getCourse() === $this) {
+//                $recipe->removeCourse(null);
+//            }
+//        }
+//
+//        return $this;
         if ($this->recipes->removeElement($recipe)) {
-            // set the owning side to null (unless already changed)
-            if ($recipe->getCourse() === $this) {
-                $recipe->setCourse(null);
-            }
+            $recipe->removeCourse($this);
         }
 
         return $this;

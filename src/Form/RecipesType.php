@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Course;
 use App\Entity\Recipes;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -46,6 +47,14 @@ class RecipesType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'by_reference' => false
+            ])
+            ->add('course', EntityType::class, [
+                'class' => Course::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => true,
+//                'by_reference' => false
             ])
             ->add('slug', TextType::class, [
                 'required' => false

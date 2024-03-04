@@ -216,4 +216,20 @@ class Recipes
 
         return $this;
     }
+
+    public function addCourse(Course $course): static
+    {
+        if (!$this->course->contains($course)) {
+            $this->course->add($course);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): static
+    {
+        $this->course->removeElement($course);
+
+        return $this;
+    }
 }

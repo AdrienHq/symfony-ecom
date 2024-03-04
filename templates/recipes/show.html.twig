@@ -5,4 +5,10 @@
     <div>
         {{ recipe.description }}
     </div>
+    </br>
+    {% for category in recipe.category %}
+        <p>
+            {{ category.name }}
+        </p>
+    {% endfor %}
 {% endblock %}
