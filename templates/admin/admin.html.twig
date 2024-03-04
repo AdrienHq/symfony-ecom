@@ -44,6 +44,10 @@
                         <a class="nav-link {{ app.request.attributes.get('_route') == 'admin.category.index' ? 'active' : '' }}"
                            href="{{ path('admin.category.index') }}">Category</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.request.attributes.get('_route') == 'admin.course.index' ? 'active' : '' }}"
+                           href="{{ path('admin.course.index') }}">Course</a>
+                    </li>
                 </ul>
                 <ul class="nav nav-pills">
                     <li class="nav-item">

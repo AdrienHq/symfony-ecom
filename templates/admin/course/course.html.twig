@@ -1,0 +1,42 @@
+{% extends "/admin/admin.html.twig" %}
+
+{% block body %}
+    <p>
+        <a class="btn btn-success btn-sm" href="{{ path('admin.course.create') }}">Create</a>
+    </p>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ course.getId() }}</td>
+                    <td>{{ course.getName() }}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a class="btn btn-warning btn-sm"
+                               href="{{ path('admin.course.edit', {id: course.id} ) }}">Edit</a>
+                            <form action="{{ path('admin.course.delete', {id: course.id} ) }}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
