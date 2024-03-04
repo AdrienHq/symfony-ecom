@@ -32,7 +32,7 @@ class CourseAdminController extends AbstractController
         ]);
     }
 
-    #[Route('[/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('[/{id}', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Course $course, Request $request, EntityManagerInterface $em): RedirectResponse|Response
     {
         $form = $this->createForm(CourseType::class, $course);

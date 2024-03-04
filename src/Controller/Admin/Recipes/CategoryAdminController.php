@@ -29,7 +29,7 @@ class CategoryAdminController extends AbstractController
         ]);
     }
 
-    #[Route('[/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('[/{id}', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Category $category, Request $request, EntityManagerInterface $em): RedirectResponse|Response
     {
         $form = $this->createForm(CategoryType::class, $category);
