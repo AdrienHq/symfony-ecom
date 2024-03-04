@@ -60,6 +60,9 @@ class Recipes
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'recipes')]
     private Collection $category;
 
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    private ?Course $course = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -198,6 +201,18 @@ class Recipes
     public function removeCategory(Category $category): static
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    public function getCourse(): ?Course
+    {
+        return $this->course;
+    }
+
+    public function setCourse(?Course $course): static
+    {
+        $this->course = $course;
 
         return $this;
     }
