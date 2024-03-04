@@ -27,7 +27,7 @@ class RecipesAdminController extends AbstractController
         ]);
     }
 
-    #[Route('[/{id}/edit', name: 'edit')]
+    #[Route('[/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Recipes $recipe, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(RecipesType::class, $recipe);
@@ -44,7 +44,7 @@ class RecipesAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'create')]
+    #[Route('/create', name: 'create', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $em)
     {
         $recipe = new Recipes();
@@ -61,5 +61,14 @@ class RecipesAdminController extends AbstractController
         return $this->render('admin/recipes/create.html.twig', [
             'form' => $form
         ]);
+    }
+
+    #[Route('{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(Recipes $recipe, EntityManagerInterface $em)
+    {
+        $em->remove($recipe);
+        $em->flush();
+        $this->addFlash('success', 'Recipe deleted');
+        return $this->redirectToRoute('admin.recipes.index');
     }
 }
