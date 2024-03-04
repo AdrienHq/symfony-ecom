@@ -32,7 +32,7 @@
                                href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">Link</a>
                             <a class="btn btn-warning btn-sm"
                                href="{{ path('admin.recipes.edit', {id: recipe.id} ) }}">Edit</a>
-                            <form action="{{ path('admin.recipes.delete', {id: recipe.id} ) }}">
+                            <form action="{{ path('admin.recipes.delete', {id: recipe.id} ) }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm">
                                     Delete
