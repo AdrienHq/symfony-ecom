@@ -7,7 +7,9 @@ use App\Form\RecipesType;
 use App\Repository\RecipesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route("/admin/recipes", name: 'admin.recipes.')]
@@ -20,7 +22,7 @@ class RecipesAdminController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index()
+    public function index(): Response
     {
         return $this->render("/admin/recipes/recipes.html.twig", [
             'recipes' => $this->recipesRepository->findAll()
@@ -28,13 +30,12 @@ class RecipesAdminController extends AbstractController
     }
 
     #[Route('[/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Recipes $recipe, Request $request, EntityManagerInterface $em)
+    public function edit(Recipes $recipe, Request $request, EntityManagerInterface $em): RedirectResponse|Response
     {
         $form = $this->createForm(RecipesType::class, $recipe);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            $recipe->setUpdatedAt(new \DateTimeImmutable());
             $this->addFlash('success', 'The recipe has been edited');
             return $this->redirectToRoute('admin.recipes.index');
         }
@@ -44,15 +45,13 @@ class RecipesAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'create', methods: ['POST'])]
-    public function create(Request $request, EntityManagerInterface $em)
+    #[Route('/create', name: 'create')]
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
         $recipe = new Recipes();
         $form = $this->createForm(RecipesType::class, $recipe);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $recipe->setCreatedAt(new \DateTimeImmutable());
-            $recipe->setUpdatedAt(new \DateTimeImmutable());
             $em->persist($recipe);
             $em->flush();
             $this->addFlash('success', 'New recipes created');
@@ -63,8 +62,8 @@ class RecipesAdminController extends AbstractController
         ]);
     }
 
-    #[Route('{id}/delete', name: 'delete', methods: ['DELETE'])]
-    public function delete(Recipes $recipe, EntityManagerInterface $em)
+    #[Route('{id}', name: 'delete', methods: ['DELETE'])]
+    public function delete(Recipes $recipe, EntityManagerInterface $em): RedirectResponse
     {
         $em->remove($recipe);
         $em->flush();
