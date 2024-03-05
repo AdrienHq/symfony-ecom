@@ -10,11 +10,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecipesRepository::class)]
 #[UniqueEntity('name')]
 #[UniqueEntity('slug')]
+#[Vich\Uploadable()]
 class Recipes
 {
     #[ORM\Id]
@@ -65,6 +68,11 @@ class Recipes
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thumbnail = null;
+
+    #TODO Manage the size of the file
+    #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
+    #[Assert\Image]
+    private ?File $thumbnailFile = null;
 
     public function __construct()
     {
@@ -245,6 +253,17 @@ class Recipes
     {
         $this->thumbnail = $thumbnail;
 
+        return $this;
+    }
+
+    public function getThumbnailFile(): ?File
+    {
+        return $this->thumbnailFile;
+    }
+
+    public function setThumbnailFile(?File $thumbnailFile): static
+    {
+        $this->thumbnailFile = $thumbnailFile;
         return $this;
     }
 }
