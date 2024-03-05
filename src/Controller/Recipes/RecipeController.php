@@ -28,7 +28,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/recipes', name: "recipes.list")]
+    #[Route('/recipes-list', name: "recipes.list")]
     public function listAllRecipes(): Response
     {
         return $this->render("recipes/list.html.twig",[
