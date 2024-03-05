@@ -63,6 +63,9 @@ class Recipes
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     private ?Course $course = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $thumbnail = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -229,6 +232,18 @@ class Recipes
     public function removeCourse(Course $course): static
     {
         $this->course->removeElement($course);
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): static
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }
