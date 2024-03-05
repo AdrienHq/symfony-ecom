@@ -2,10 +2,14 @@
 
 {% block body %}
     <h1>{{ recipe.name }} recipe</h1>
+
+    <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" alt="">
+
     <div>
         {{ recipe.description }}
     </div>
     </br>
+    
     {% for category in recipe.category %}
         <p>
             {{ category.name }}
