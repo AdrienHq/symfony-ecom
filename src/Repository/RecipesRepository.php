@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Recipes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Recipes>
@@ -16,9 +18,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RecipesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(
+        ManagerRegistry                     $registry,
+        private readonly PaginatorInterface $paginator)
     {
         parent::__construct($registry, Recipes::class);
+    }
+
+    public function paginateRecipes(int $page): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->createQueryBuilder('r')->leftJoin('r.category', 'c')->select('r', 'c'),
+            $page,
+            7,
+            [
+                'distinct' => false,
+                'sortFieldAllowList' => ['r.id', 'r.name', 'r.createdAt', 'r.updatedAt']
+            ]
+        );
     }
 
 //    /**

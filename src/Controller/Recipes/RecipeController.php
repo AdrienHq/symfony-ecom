@@ -4,6 +4,7 @@ namespace App\Controller\Recipes;
 
 use App\Repository\RecipesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -15,7 +16,7 @@ class RecipeController extends AbstractController
     {
     }
 
-    #[Route('/recipe/{slug}-{id}', name: "recipe.detail", requirements: ['id' => '\d+' , 'slug' => '[a-z0-9-]+'])]
+    #[Route('/recipe/{slug}-{id}', name: "recipe.detail", requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
     public function index(int $id, string $slug): Response
     {
         $recipe = $this->recipesRepository->find($id);
@@ -29,10 +30,12 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/recipes-list', name: "recipes.list")]
-    public function listAllRecipes(): Response
+    public function listAllRecipes(RecipesRepository $recipesRepository, Request $request): Response
     {
-        return $this->render("recipes/list.html.twig",[
-            'recipes' => $this->recipesRepository->findAll()
+        $recipes = $recipesRepository->paginateRecipes($request->query->getInt('page', 1));
+
+        return $this->render("recipes/list.html.twig", [
+            'recipes' => $recipes,
         ]);
     }
 }
