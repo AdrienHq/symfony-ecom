@@ -50,13 +50,26 @@
                         <a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}"
                            href="{{ path('contact') }}">Contact</a>
                     </li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
+                               href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
+                               href="{{ path('app_login') }}">Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
-                <ul class="nav nav-pills mr-2">
-                    <li class="nav-item">
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
-                           href="{{ path('admin') }}">Admin</a>
-                    </li>
-                </ul>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <ul class="nav nav-pills mr-2">
+                        <li class="nav-item">
+                            <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
+                               href="{{ path('admin') }}">Admin</a>
+                        </li>
+                    </ul>
+                {% endif %}
             </div>
         </div>
     </nav>
