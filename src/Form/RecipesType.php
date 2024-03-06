@@ -29,17 +29,23 @@ class RecipesType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Name'
             ])
-            ->add('thumbnailFile', FileType::class)
+            ->add('thumbnailFile', FileType::class, [
+                'required' => false,
+            ])
             ->add('content', TextareaType::class, [
+                'required' => false,
                 'empty_data' => ''
             ])
             ->add('description', TextareaType::class, [
+                'required' => false,
                 'empty_data' => ''
             ])
             ->add('questions', TextareaType::class, [
+                'required' => false,
                 'empty_data' => ''
             ])
             ->add('recipeSteps', TextareaType::class, [
+                'required' => false,
                 'empty_data' => ''
             ])
             ->add('duration', IntegerType::class, [
