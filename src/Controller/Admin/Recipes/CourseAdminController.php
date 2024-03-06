@@ -14,8 +14,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route("/admin/course", name: 'admin.course.')]
+#[IsGranted('ROLE_ADMIN')]
 class CourseAdminController extends AbstractController
 {
     public function __construct(
