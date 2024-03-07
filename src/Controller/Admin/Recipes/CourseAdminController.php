@@ -30,7 +30,7 @@ class CourseAdminController extends AbstractController
     public function index(): Response
     {
         return $this->render("/admin/course/course.html.twig", [
-            'courses' => $this->courseRepository->findAll()
+            'courses' => $this->courseRepository->findCourseByRecipe()
         ]);
     }
 

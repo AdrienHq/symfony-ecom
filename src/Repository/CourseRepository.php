@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\DTO\course\CourseWithCountDTO;
 use App\Entity\Course;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +20,20 @@ class CourseRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Course::class);
+    }
+
+    /**
+     * @return CourseWithCountDTO[]
+     */
+    public function findCourseByRecipe(): array
+    {
+        return $this->getEntityManager()->createQuery(<<<DQL
+            SELECT NEW App\\DTO\\course\\CourseWithCountDTO(c.id, c.name, COUNT(c.id))
+            FROM App\Entity\Course c
+            LEFT JOIN c.recipes r
+            GROUP BY c.id
+            DQL
+        )->getResult();
     }
 
 //    /**
