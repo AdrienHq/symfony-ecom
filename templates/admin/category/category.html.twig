@@ -11,8 +11,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
-                <th scope="col">Creation Date</th>
-                <th scope="col">Last Update</th>
+                <th scope="col">Number of recipe</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -20,10 +19,9 @@
             {% for category in categories %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ category.getId() }}</td>
-                    <td>{{ category.getName() }}</td>
-                    <td>{{ category.getCreatedAt()|date("d/m/Y") }}</td>
-                    <td>{{ category.getUpdatedAt()|date("d/m/Y") }}</td>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.count }}</td>
                     <td>
                         <div class="d-flex gap-1">
                             <a class="btn btn-warning btn-sm"
