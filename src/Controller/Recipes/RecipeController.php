@@ -32,7 +32,7 @@ class RecipeController extends AbstractController
     #[Route('/recipes-list', name: "recipes.list")]
     public function listAllRecipes(RecipesRepository $recipesRepository, Request $request): Response
     {
-        $recipes = $recipesRepository->paginateRecipes($request->query->getInt('page', 1));
+        $recipes = $recipesRepository->findRecipesForSpecificPage($request->query->getInt('page', 1));
 
         return $this->render("recipes/list.html.twig", [
             'recipes' => $recipes,
