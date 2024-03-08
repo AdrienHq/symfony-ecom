@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -23,55 +24,68 @@ class Recipes
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['recipes.index'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min: 4)]
     #[Assert\NotBlank()]
     #[Sanitizer()]
+    #[Groups(['recipes.index'])]
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
+    #[Groups(['recipes.index'])]
     private string $content = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
+    #[Groups(['recipes.index'])]
     private string $description = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
+    #[Groups(['recipes.index'])]
     private string $questions = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
+    #[Groups(['recipes.index'])]
     private string $recipeSteps = '';
 
     #[ORM\Column]
+    #[Groups(['recipes.index'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['recipes.index'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['recipes.index'])]
     private ?string $slug = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
+    #[Groups(['recipes.index'])]
     private ?int $duration = 0;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'recipes')]
+    #[Groups(['recipes.index'])]
     private Collection $category;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[Groups(['recipes.index'])]
     private ?Course $course = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['recipes.index'])]
     private ?string $thumbnail = null;
 
     #TODO Manage the size of the file
     #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
-    #[Assert\Image]
+    #[Groups(['recipes.index'])]
     private ?File $thumbnailFile = null;
 
     public function __construct()
