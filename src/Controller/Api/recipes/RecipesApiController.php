@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class RecipesApiController extends AbstractController
 {
@@ -28,5 +29,12 @@ class RecipesApiController extends AbstractController
         ]);
     }
 
-
+    #[Route("/api/recipesPaginate")]
+    public function getCollectionForSpecificPageRecipes(RecipesRepository $recipesRepository, Request $request): JsonResponse
+    {
+        $recipes = $recipesRepository->findRecipesForSpecificPage($request->query->getInt('page', 1));
+        return $this->json($recipes, 200, [], [
+            'groups' => ['recipes.getCollection', 'recipes.getCollectionPerPage']
+        ]);
+    }
 }
