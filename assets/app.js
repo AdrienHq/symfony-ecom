@@ -1,3 +1,4 @@
+import { registerReactControllerComponents } from '@symfony/ux-react';
 import './bootstrap.js';
 import './bootstrap';
 // import $ from 'jquery';
@@ -10,3 +11,8 @@ import './bootstrap';
 import './styles/app.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+// assets/app.js
+import { registerReactControllerComponents } from '@symfony/ux-react';
+
+registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));
