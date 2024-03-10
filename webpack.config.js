@@ -22,8 +22,9 @@ Encore
      */
     // Define the entry for your custom JavaScript file
     .addEntry('bootstrap', './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+    .addEntry('app', './assets/app.js')
     // Add app.scss as a style entry
-    .addStyleEntry('app', './assets/styles/app.scss')
+    // .addStyleEntry('app', './assets/styles/app.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -63,7 +64,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you use React
-    //.enableReactPreset()
+    .enableReactPreset()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
@@ -71,6 +72,9 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+
+    .enablePostCssLoader()
+    .enableStimulusBridge('./assets/controllers.json')
 ;
 
 module.exports = Encore.getWebpackConfig();
