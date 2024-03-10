@@ -22,8 +22,9 @@ Encore
      */
     // Define the entry for your custom JavaScript file
     .addEntry('bootstrap', './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+    .addEntry('app', './assets/app.js')
     // Add app.scss as a style entry
-    .addStyleEntry('app', './assets/styles/app.scss')
+    // .addStyleEntry('app', './assets/styles/app.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -73,6 +74,7 @@ Encore
     //.autoProvidejQuery()
 
     .enablePostCssLoader()
+    .enableStimulusBridge('./assets/controllers.json')
 ;
 
 module.exports = Encore.getWebpackConfig();

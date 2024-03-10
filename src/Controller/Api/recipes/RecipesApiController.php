@@ -46,7 +46,7 @@ class RecipesApiController extends AbstractController
         ]);
     }
 
-    #[Route("/api/recipes", methods: ["POST"])]
+    #[Route("/api/recipes/post", methods: ["POST"])]
     public function postRecipes(
         Request       $request,
         #[MapRequestPayload(

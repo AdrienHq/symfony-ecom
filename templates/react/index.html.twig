@@ -1,9 +1,11 @@
+{# templates/home.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReactController!{% endblock %}
-
 {% block body %}
+    <div {{ react_component('Hello', { 'fullName': 'AdrienHq' }) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
 
-    <div class="text-amber-400 " {{ react_component('Hello.jsx', {'fullName' : 'AdrienHq'}) }}>ICI</div>
-
+    {# Component living in a subdirectory: "assets/react/controllers/Admin/OtherComponent" #}
+    <div {{ react_component('Admin/OtherComponent') }}></div>
 {% endblock %}
