@@ -1,0 +1,8 @@
+{# templates/home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="text-amber-700" {{ react_component('Hello', { 'fullName': 'testetstetst' }) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
+{% endblock %}
