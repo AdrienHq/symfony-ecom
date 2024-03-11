@@ -2,7 +2,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="text-amber-700" {{ react_component('Hello', { 'fullName': 'testetstetst' }) }}>
-        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
-    </div>
+    <div {{ react_component('Home') }}></div>
+    <h3>2 eme react element</h3>
+    <recipe-list data-post="{{ 1 }}" data-user="¨{{ app.user ? app.user.id :0 }}"></recipe-list>
 {% endblock %}

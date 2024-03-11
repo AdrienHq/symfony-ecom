@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use App\Provider\Recipes\RecipesGetProvider;
 use App\Repository\RecipesRepository;
 use App\Validator\Entry;
 use App\Validator\Sanitizer;
@@ -19,73 +23,74 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[UniqueEntity('name')]
 #[UniqueEntity('slug')]
 #[Vich\Uploadable()]
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/recipes/{id}',
+            normalizationContext: ['groups' => [Recipes::ITEM], 'skip_null_values' => false],
+            name: 'api_recipes_get',
+            provider: RecipesGetProvider::class,
+        ),
+        new GetCollection(),
+    ]
+)]
 class Recipes
 {
+    const ITEM = 'RECIPES_ITEM';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recipes.index'])]
+    #[Groups([Recipes::ITEM])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min: 4)]
     #[Assert\NotBlank()]
     #[Sanitizer()]
-    #[Groups(['recipes.index'])]
+    #[Groups([Recipes::ITEM])]
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
-    #[Groups(['recipes.index'])]
     private string $content = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
-    #[Groups(['recipes.index'])]
     private string $description = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
-    #[Groups(['recipes.index'])]
     private string $questions = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
-    #[Groups(['recipes.index'])]
     private string $recipeSteps = '';
 
     #[ORM\Column]
-    #[Groups(['recipes.index'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['recipes.index'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['recipes.index'])]
     private ?string $slug = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
-    #[Groups(['recipes.index'])]
     private ?int $duration = 0;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'recipes')]
-    #[Groups(['recipes.index'])]
     private Collection $category;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
-    #[Groups(['recipes.index'])]
     private ?Course $course = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['recipes.index'])]
     private ?string $thumbnail = null;
 
     #TODO Manage the size of the file
     #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
-    #[Groups(['recipes.index'])]
     private ?File $thumbnailFile = null;
 
     public function __construct()

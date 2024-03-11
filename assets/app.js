@@ -15,3 +15,4 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 // assets/app.js
 registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));
+import './react/controllers/Recipe.jsx'
