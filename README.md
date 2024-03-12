@@ -1,7 +1,16 @@
 # Symfony-Ecom
 
+## Back-end
+
 - Symfony 7
 - Php 8.2
+- Api Platform
+
+## Front-end
+
+- Symfony UX
+- React
+- Tailwind CSS
 
 - EasyAdmin 4.9
 
