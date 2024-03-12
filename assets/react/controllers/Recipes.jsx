@@ -24,7 +24,7 @@ function Recipes() {
     </div>
 }
 
-function Recipe({recipe}) {
+const Recipe = React.memo(({recipe}) => {
     const createdAtDate = new Date(recipe.createdAt)
     const updatedAtDate = new Date(recipe.updatedAt)
     return (
@@ -41,7 +41,7 @@ function Recipe({recipe}) {
             </div>
         </div>
     );
-}
+})
 
 
 function RecipesCount({count}) {
