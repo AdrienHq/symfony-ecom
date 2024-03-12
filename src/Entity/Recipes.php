@@ -74,9 +74,11 @@ class Recipes
     private string $recipeSteps = '';
 
     #[ORM\Column]
+    #[Groups([Recipes::ITEM])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups([Recipes::ITEM])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255)]
