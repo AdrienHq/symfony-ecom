@@ -24,7 +24,7 @@ class RecipesApiController extends AbstractController
         ]);
     }
 
-    #[Route("/api/recipes", methods: ["GET"])]
+    #[Route("/api/recipes/old", methods: ["GET"])]
     public function getCollectionRecipes(RecipesRepository $recipesRepository): JsonResponse
     {
         $recipes = $recipesRepository->findAll();
@@ -33,7 +33,7 @@ class RecipesApiController extends AbstractController
         ]);
     }
 
-    #[Route("/api/recipesPaginate", methods: ["GET"])]
+    #[Route("/api/recipesPaginate/old", methods: ["GET"])]
     public function getCollectionForSpecificPageRecipes(
         RecipesRepository    $recipesRepository,
         #[MapQueryString]
@@ -46,7 +46,7 @@ class RecipesApiController extends AbstractController
         ]);
     }
 
-    #[Route("/api/recipes", methods: ["POST"])]
+    #[Route("/api/recipes/old", methods: ["POST"])]
     public function postRecipes(
         Request       $request,
         #[MapRequestPayload(
