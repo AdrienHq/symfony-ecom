@@ -1,6 +1,6 @@
 import {useCallback, useState} from "react";
 
-export function useRecipeFetch(url) {
+export function useRecipesFetch(url) {
     const [loading, setLoading] = useState(false)
     const [items, setItems] = useState([])
     const [count, setCount] = useState(0)

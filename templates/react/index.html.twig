@@ -3,6 +3,6 @@
 
 {% block body %}
     <div {{ react_component('Home') }}></div>
-    <h3>2 eme react element</h3>
-    <recipe-list data-post="{{ 1 }}" data-user="¨{{ app.user ? app.user.id :0 }}"></recipe-list>
+    <h3 class="text-violet-700">2 eme react element</h3>
+    <recipes-list data-post="{{ 1 }}" data-user="¨{{ app.user ? app.user.id :0 }}"></recipes-list>
 {% endblock %}
