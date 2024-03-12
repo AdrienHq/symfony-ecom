@@ -31,7 +31,13 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             name: 'api_recipes_get',
             provider: RecipesGetProvider::class,
         ),
-        new GetCollection(),
+        new GetCollection(
+            uriTemplate: '/recipes',
+            paginationEnabled: true,
+            paginationItemsPerPage: 6,
+            normalizationContext: ['groups' => [Recipes::ITEM], 'skip_null_values' => false],
+            name: 'api_recipes_get_collection',
+        ),
     ]
 )]
 class Recipes
