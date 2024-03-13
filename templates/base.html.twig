@@ -1,84 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Symfony Ecom !{% endblock %}</title>
-    <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Symfony Kitchen !{% endblock %}</title>
+        <link rel="icon"
+              href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
 
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-{#        {% block importmap %}{{ importmap('app') }}{% endblock %}#}
-    {% endblock %}
-</head>
-<body>
-<div class="" style="background-color: darkorange; color: black;">
-    <div class="page-width">
-        <div class="d-flex">
-            <div class="announcement-banner text-center">
-                <p class="text-center">
-                    <strong>Join our newsletter to get everything !!!</strong>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container ">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'index' ? 'active' : '' }}"
-                           href="{{ path('index') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'recipes.list' ? 'active' : '' }}"
-                           href="{{ path('recipes.list') }}">Recettes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Fridge</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}"
-                           href="{{ path('contact') }}">Contact</a>
-                    </li>
-                    {% if is_granted('ROLE_USER') %}
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
-                               href="{{ path('app_logout') }}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
-                               href="{{ path('app_login') }}">Login</a>
-                        </li>
-                    {% endif %}
-                </ul>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <ul class="nav nav-pills mr-2">
-                        <li class="nav-item">
-                            <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
-                               href="{{ path('admin') }}">Admin</a>
-                        </li>
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-</div>
-<div class="container my-4">
-    {% include 'partials/flash.html.twig' %}
-    {% block body %}
-    {% endblock %}
-</div>
-<script src="{{ asset('build/bootstrap.js') }}"></script>
-</body>
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {#        {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+        {% endblock %}
+    </head>
+    <body>
+        {% include 'partials/flash.html.twig' %}
+        <navigation-element></navigation-element>
+        {% block body %}
+        {% endblock %}
+        <script src="{{ asset('build/bootstrap.js') }}"></script>
+    </body>
 </html>
+
+
+{# <div class="" style="background-color: darkorange; color: black;"> #}
+{#    <div class="page-width"> #}
+{#        <div class="d-flex"> #}
+{#            <div class="announcement-banner text-center"> #}
+{#                <p class="text-center"> #}
+{#                    <strong>Join our newsletter to get everything !!!</strong> #}
+{#                </p> #}
+{#            </div> #}
+{#        </div> #}
+{#    </div> #}
+{# </div> #}
+
+{# <div class="container "> #}
+{#    <nav class="navbar navbar-expand-lg"> #}
+{#        <div class="container-fluid"> #}
+{#            <div class="collapse navbar-collapse" id="navbarNav"> #}
+{#                <ul class="nav nav-pills"> #}
+{#                    <li class="nav-item"> #}
+{#                        <a class="nav-link {{ app.request.attributes.get('_route') == 'index' ? 'active' : '' }}" #}
+{#                           href="{{ path('index') }}">Home</a> #}
+{#                    </li> #}
+{#                    <li class="nav-item"> #}
+{#                        <a class="nav-link {{ app.request.attributes.get('_route') == 'recipes.list' ? 'active' : '' }}" #}
+{#                           href="{{ path('recipes.list') }}">Recettes</a> #}
+{#                    </li> #}
+{#                    <li class="nav-item"> #}
+{#                        <a class="nav-link" href="#">Fridge</a> #}
+{#                    </li> #}
+{#                    <li class="nav-item"> #}
+{#                        <a class="nav-link" href="#">Services</a> #}
+{#                    </li> #}
+{#                    <li class="nav-item"> #}
+{#                        <a class="nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}" #}
+{#                           href="{{ path('contact') }}">Contact</a> #}
+{#                    </li> #}
+{#                    {% if is_granted('ROLE_USER') %} #}
+{#                        <li class="nav-item"> #}
+{#                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}" #}
+{#                               href="{{ path('app_logout') }}">Logout</a> #}
+{#                        </li> #}
+{#                    {% else %} #}
+{#                        <li class="nav-item"> #}
+{#                            <a class="nav-link {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}" #}
+{#                               href="{{ path('app_login') }}">Login</a> #}
+{#                        </li> #}
+{#                    {% endif %} #}
+{#                </ul> #}
+{#                {% if is_granted('ROLE_ADMIN') %} #}
+{#                    <ul class="nav nav-pills mr-2"> #}
+{#                        <li class="nav-item"> #}
+{#                            <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}" #}
+{#                               href="{{ path('admin') }}">Admin</a> #}
+{#                        </li> #}
+{#                    </ul> #}
+{#                {% endif %} #}
+{#            </div> #}
+{#        </div> #}
+{#    </nav> #}
+{# </div> #}
+
+
