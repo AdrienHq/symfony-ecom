@@ -1,5 +1,5 @@
 {% block navbar %}
-    <nav class="w-full fixed top-0 bg-white z-10 ">
+    <nav class="w-full top-0 bg-white z-10 ">
         <div class="container mx-auto py-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 {#                <img class="w-8" src="./img/logo.png" alt="" /> #}
@@ -24,19 +24,31 @@
                 </li>
             </ul>
             <div class="hidden md:block  cursor-pointer">
-                {% if is_granted('ROLE_USER') %}
-                    <a class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
-                       href="{{ path('app_logout') }}">
-                        Logout
-                        <span aria-hidden="true">&rarr;</span>
-                    </a>
-                {% else %}
-                    <a class="bg-emerald-900 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
-                       href="{{ path('app_login') }}">
-                        Login
-                        <span aria-hidden="true">&rarr;</span>
-                    </a>
+                <ul class="hidden md:flex space-x-10 font-bold text-sm uppercase">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
+                           href="{{ path('admin') }}">Admin</a>
+                    </li>
                 {% endif %}
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
+                           href="{{ path('app_logout') }}">
+                            Logout
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="bg-emerald-900 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
+                           href="{{ path('app_login') }}">
+                            Login
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                </ul>
             </div>
             <div id="hamburger" class="space-y-1 md:hidden cursor-pointer z-20">
                 <div class="w-6 h-0.5 bg-black"></div>
@@ -67,7 +79,7 @@
             </ul>
         </div>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const hamburger = document.querySelector("#hamburger");
                 const menu = document.querySelector("#menu");
                 const hLinks = document.querySelectorAll("#hLink");
