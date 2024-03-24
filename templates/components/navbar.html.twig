@@ -1,47 +1,91 @@
-{#{% extends "base.html.twig" %}#}
-
 {% block navbar %}
-    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div class="flex lg:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                     alt="">
-            </a>
+    <nav class="w-full fixed top-0 bg-white z-10 ">
+        <div class="container mx-auto py-5 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                {#                <img class="w-8" src="./img/logo.png" alt="" /> #}
+                <a class="text-2xl font-bold text-indigo-900" href="{{ path('index') }}">ADHD Kitchen</a>
+            </div>
+            <ul class="hidden md:flex space-x-10 font-bold text-sm uppercase">
+                <li class="{{ app.request.attributes.get('_route') == 'recipes.list' ? 'text-red-600' : 'text-black' }}">
+                    <a href="{{ path('recipes.list') }}" class="hover:text-gray-500"
+                    >Recettes</a>
+                </li>
+                <li class="{{ app.request.attributes.get('_route') == 'cat' ? 'text-red-600' : 'text-black' }}">
+                    <a href="{{ path('index') }}" class="hover:text-gray-500"
+                    >Categories</a>
+                </li>
+                <li class="{{ app.request.attributes.get('_route') == 'fridge' ? 'text-red-600' : 'text-black' }}">
+                    <a href="{{ path('index') }}" class="hover:text-gray-500"
+                    >Fridge</a>
+                </li>
+                <li class="{{ app.request.attributes.get('_route') == 'contact' ? 'text-red-600' : 'text-black' }}">
+                    <a href="{{ path('index') }}" class="hover:text-gray-500">
+                        Contact</a>
+                </li>
+            </ul>
+            <div class="hidden md:block  cursor-pointer">
+                {% if is_granted('ROLE_USER') %}
+                    <a class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
+                       href="{{ path('app_logout') }}">
+                        Logout
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                {% else %}
+                    <a class="bg-emerald-900 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
+                       href="{{ path('app_login') }}">
+                        Login
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                {% endif %}
+            </div>
+            <div id="hamburger" class="space-y-1 md:hidden cursor-pointer z-20">
+                <div class="w-6 h-0.5 bg-black"></div>
+                <div class="w-6 h-0.5 bg-black"></div>
+                <div class="w-6 h-0.5 bg-black"></div>
+            </div>
+            <ul
+                    id="menu"
+                    class="hidden bg-indigo-900 absolute left-0 top-0 w-full p-10 rounded-b-3xl space-y-10 text-white text-center"
+            >
+                <li>
+                    <a id="hLink" href="{{ path('recipes.list') }}"
+                       class="{{ app.request.attributes.get('_route') == 'recipes.list' ? 'active' : '' }}">Recettes
+                    </a>
+                </li>
+                <li>
+                    <a id="hLink" href="{{ path('index') }}"
+                       class="{{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}">Categories</a>
+                </li>
+                <li>
+                    <a id="hLink" href="{{ path('index') }}"
+                       class="{{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}">Fridge</a>
+                </li>
+                <li>
+                    <a id="hLink" href="{{ path('index') }}"
+                       class="{{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}">Contact</a>
+                </li>
+            </ul>
         </div>
-        <div class="flex lg:hidden">
-            <button type="button"
-                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-                <span class="sr-only">Open main menu</span>
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                     aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-                </svg>
-            </button>
-        </div>
-        <div class="hidden lg:flex lg:gap-x-12">
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Product</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const hamburger = document.querySelector("#hamburger");
+                const menu = document.querySelector("#menu");
+                const hLinks = document.querySelectorAll("#hLink");
 
+                hamburger.addEventListener("click", () => {
+                    menu.classList.toggle("hidden");
+                    hamburger.classList.toggle("bg-white");
+                });
 
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            {% if is_granted('ROLE_USER') %}
-                <a class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
-                   href="{{ path('app_logout') }}">
-                    Logout
-                    <span aria-hidden="true">&rarr;</span>
-                </a>
-            {% else %}
-                <a class="bg-emerald-900 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
-                   href="{{ path('app_login') }}">
-                    Login
-                    <span aria-hidden="true">&rarr;</span>
-                </a>
-            {% endif %}
-        </div>
+                hLinks.forEach(link => {
+                    link.addEventListener("click", () => {
+                        menu.classList.toggle("hidden");
+                        hamburger.classList.toggle("bg-white");
+                    });
+                });
+            });
+        </script>
     </nav>
 {% endblock %}
+
+
