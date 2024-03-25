@@ -12,7 +12,6 @@
 - React
 - Tailwind CSS
 
-- EasyAdmin 4.9
 
 ## Install 
 
