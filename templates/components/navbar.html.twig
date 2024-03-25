@@ -2,7 +2,7 @@
     <nav class="w-full top-0 bg-white z-10 ">
         <div class="container mx-auto py-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                {#                <img class="w-8" src="./img/logo.png" alt="" /> #}
+                                <img class="w-8" src="./img/logo.png" alt="" />
                 <a class="text-4xl font-bold text-indigo-900" href="{{ path('index') }}">ADHD Kitchen</a>
             </div>
             <ul class="hidden md:flex space-x-10 font-bold text-sm uppercase">
@@ -14,6 +14,23 @@
                     <a href="{{ path('index') }}" class="hover:text-gray-500"
                     >Categories</a>
                 </li>
+
+                <li>
+                    <a>Dropdown</a>
+                    <ul class="dropdown">
+                        <li><a>test</a></li>
+                        <li><a>test</a></li>
+                        <li><a>test</a></li>
+                        <li><a>test</a></li>
+                        <li><a>test6</a></li>
+                    </ul>
+
+
+                </li>
+
+
+
+
                 <li class="{{ app.request.attributes.get('_route') == 'fridge' ? 'text-red-600' : 'text-black' }}">
                     <a href="{{ path('index') }}" class="hover:text-gray-500"
                     >Fridge</a>
