@@ -1,14 +1,51 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Recipes</h1>
-    <div>
-        {% for recipe in recipes %}
-            <li>
-                <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">{{ recipe.getName() }}</a>
-            </li>
-        {% endfor %}
+    {#    <h1>Recipes</h1> #}
+    {#    <div> #}
+    {#        {% for recipe in recipes %} #}
+    {#            <li> #}
+    {#                <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">{{ recipe.getName() }}</a> #}
+    {#            </li> #}
+    {#        {% endfor %} #}
+    {#    </div> #}
+    <div class="list-container">
+        <div class="separator"></div>
+        <h1 class="list-title">Toutes nos recettes :</h1>
+        <div class="separator"></div>
+        <div class="card-container">
+            {% for recipe in recipes %}
+                <div class="card">
+                    <img src="{{ asset('images/recipes/screenshot-from-2024-02-20-16-19-52-65e731687fe2a542498343.png') }}"
+                         alt="">
+                    <div class="card-content">
+                        <h3>{{ recipe.name|default("") }}</h3>
+                        <p>
+                            {{ recipe.description|default("")|slice(0, 120) }}{% if recipe.description|length > 120 %} ...{% endif %}
+                        </p>
+                        <a href="/" class="btn">Lire la suite</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-    {{ knp_pagination_render(recipes) }}
+    <div class="pagination">
+        {{ knp_pagination_render(recipes) }}
+    </div>
+
+
+
+    {#        <div class="grid grid-cols-3 gap-5"> #}
+    {#            {% for recipe in recipes %} #}
+    {#                <div class="card" style="width: 18rem;"> #}
+    {#                    <div class="card-body"> #}
+    {#                        <h5 class="card-title">{{ recipe.name | default("") }}</h5> #}
+    {#                        <p class="card-text">{{ recipe.description | default("") }}</p> #}
+    {#                        <a href="#" class="btn btn-primary">Go somewhere</a> #}
+    {#                    </div> #}
+    {#                </div> #}
+    {#            {% endfor %} #}
+    {#        </div> #}
+    {#        {{ knp_pagination_render(recipes) }} #}
 {% endblock %}
 

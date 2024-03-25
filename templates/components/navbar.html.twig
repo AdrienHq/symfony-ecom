@@ -3,7 +3,7 @@
         <div class="container mx-auto py-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 {#                <img class="w-8" src="./img/logo.png" alt="" /> #}
-                <a class="text-2xl font-bold text-indigo-900" href="{{ path('index') }}">ADHD Kitchen</a>
+                <a class="text-4xl font-bold text-indigo-900" href="{{ path('index') }}">ADHD Kitchen</a>
             </div>
             <ul class="hidden md:flex space-x-10 font-bold text-sm uppercase">
                 <li class="{{ app.request.attributes.get('_route') == 'recipes.list' ? 'text-red-600' : 'text-black' }}">
