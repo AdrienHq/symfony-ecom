@@ -2,7 +2,7 @@
     <nav class="w-full top-0 bg-white z-10 ">
         <div class="container mx-auto py-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                                <img class="w-8" src="./img/logo.png" alt="" />
+                <img class="w-8" src="./img/logo.png" alt=""/>
                 <a class="text-4xl font-bold text-indigo-900" href="{{ path('index') }}">ADHD Kitchen</a>
             </div>
             <ul class="hidden md:flex space-x-10 font-bold text-sm uppercase">
@@ -10,61 +10,61 @@
                     <a href="{{ path('recipes.list') }}" class="hover:text-gray-500"
                     >Recettes</a>
                 </li>
-                <li class="{{ app.request.attributes.get('_route') == 'cat' ? 'text-red-600' : 'text-black' }}">
-                    <a href="{{ path('index') }}" class="hover:text-gray-500"
-                    >Categories</a>
-                </li>
-
-                <li>
-                    <a>Dropdown</a>
+                <li class="dropdown-li">
+                    <a class="dropdown-a">Catégories</a>
                     <ul class="dropdown">
-                        <li><a>test</a></li>
-                        <li><a>test</a></li>
-                        <li><a>test</a></li>
-                        <li><a>test</a></li>
-                        <li><a>test6</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test6</a></li>
                     </ul>
-
-
                 </li>
-
-
-
-
+                <li class="dropdown-li">
+                    <a class="dropdown-a">Repas</a>
+                    <ul class="dropdown">
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test</a></li>
+                        <li class="dropdown-li-li"><a>test6</a></li>
+                    </ul>
+                </li>
                 <li class="{{ app.request.attributes.get('_route') == 'fridge' ? 'text-red-600' : 'text-black' }}">
                     <a href="{{ path('index') }}" class="hover:text-gray-500"
                     >Fridge</a>
                 </li>
-                <li class="{{ app.request.attributes.get('_route') == 'contact' ? 'text-red-600' : 'text-black' }}">
-                    <a href="{{ path('index') }}" class="hover:text-gray-500">
-                        Contact</a>
-                </li>
             </ul>
-            <div class="hidden md:block  cursor-pointer">
+            <div class="hidden md:block cursor-pointer">
                 <ul class="hidden md:flex space-x-10 font-bold text-sm uppercase">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li>
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
-                           href="{{ path('admin') }}">Admin</a>
-                    </li>
-                {% endif %}
-                {% if is_granted('ROLE_USER') %}
-                    <li>
-                        <a class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
-                           href="{{ path('app_logout') }}">
-                            Logout
-                            <span aria-hidden="true">&rarr;</span>
-                        </a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a class="bg-emerald-900 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
-                           href="{{ path('app_login') }}">
-                            Login
-                            <span aria-hidden="true">&rarr;</span>
-                        </a>
-                    </li>
-                {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="{{ app.request.attributes.get('_route') == 'admin' ? 'text-red-600' : 'text-black' }}">
+                            <a href="{{ path('admin') }}" class="hover:text-gray-500">
+                            Admin</a>
+                        </li>
+                    {% else %}
+                        <li class="{{ app.request.attributes.get('_route') == 'contact' ? 'text-red-600' : 'text-black' }}">
+                            <a href="{{ path('index') }}" class="hover:text-gray-500">
+                                Contact</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a class="bg-red-900 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
+                               href="{{ path('app_logout') }}">
+                                Logout
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="bg-emerald-900 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
+                               href="{{ path('app_login') }}">
+                                Login
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div id="hamburger" class="space-y-1 md:hidden cursor-pointer z-20">
