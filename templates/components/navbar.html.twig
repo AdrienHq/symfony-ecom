@@ -13,21 +13,17 @@
                 <li class="dropdown-li">
                     <a class="dropdown-a">Catégories</a>
                     <ul class="dropdown">
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test6</a></li>
+                        {{ render(controller(
+                            'App\\Controller\\HomeController::renderCategoriesFragmentNavbar'
+                        )) }}
                     </ul>
                 </li>
                 <li class="dropdown-li">
                     <a class="dropdown-a">Repas</a>
                     <ul class="dropdown">
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test</a></li>
-                        <li class="dropdown-li-li"><a>test6</a></li>
+                        {{ render(controller(
+                            'App\\Controller\\HomeController::renderCoursesFragmentNavbar'
+                        )) }}
                     </ul>
                 </li>
                 <li class="{{ app.request.attributes.get('_route') == 'fridge' ? 'text-red-600' : 'text-black' }}">
@@ -40,7 +36,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="{{ app.request.attributes.get('_route') == 'admin' ? 'text-red-600' : 'text-black' }}">
                             <a href="{{ path('admin') }}" class="hover:text-gray-500">
-                            Admin</a>
+                                Admin</a>
                         </li>
                     {% else %}
                         <li class="{{ app.request.attributes.get('_route') == 'contact' ? 'text-red-600' : 'text-black' }}">

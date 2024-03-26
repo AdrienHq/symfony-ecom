@@ -9,6 +9,7 @@ framework:
     #esi: true
     #fragments: true
     http_method_override: true
+    fragments: { path: /_fragment }
 
 when@test:
     framework:
