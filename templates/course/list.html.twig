@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container">
         <div class="separator"></div>
-        <h1 class="table-title">Nos recettes contenant l'ingrédient : {{ category.name }}</h1>
+        <h1 class="table-title">Nos repas contenant l'ingrédient : {{ course.name }}</h1>
         <div class="separator"></div>
         {#        car-container #}
         <div class="table-container">
@@ -22,11 +22,10 @@
                         <td>{{ recipe.name }}</td>
                         <td>{{ recipe.duration }}</td>
                         <td>{{ recipe.notation | default(0) }}</td>
-                        <td>
-                            <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}"
-                               class="btn btn-success">
-                                Lire la suite
-                            </a>
+                        <td><a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}"
+                               class="btn btn-success">Lire
+                                la
+                                suite</a>
                         </td>
                     </tr>
                 {% endfor %}
