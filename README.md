@@ -10,7 +10,6 @@
 
 - Symfony UX
 - React
-- Tailwind CSS
 
 
 ## Install 
