@@ -3,33 +3,39 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="card text-center mx-auto items-center mt-5" style="width: 24rem; height: 34rem">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email or Username</label>
-    <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            <h1 class="h3 mt-5 mb-3 font-weight-normal">Please sign in</h1>
+            <label class="mb-2" for="inputEmail">Email or Username</label>
+            <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="mx-auto mb-5 form-control custom-input"
+                   autocomplete="email" required autofocus>
 
-    <label>
-        <input type="checkbox" name="_remember_me" checked>
-        Keep me logged in ?
-    </label>
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+            <label class="mb-2" for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="mx-auto mb-5 form-control custom-input"
+                   autocomplete="current-password" required>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
+
+            <div class="mt-5 mb-2">
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Sign in
+                </button>
+            </div>
+            <label>
+                <input type="checkbox" name="_remember_me" checked>
+                Keep me logged in ?
+            </label>
+        </form>
+    </div>
 {% endblock %}
