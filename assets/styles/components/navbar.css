@@ -1,37 +1,22 @@
-ul {
-    list-style: none;
+/* Style for Logout button */
+.btn-danger {
+    background-color: orangered;
+    border-color: orangered;
 }
 
-ul li {
-    display: inline-block;
-    position: relative;
+.btn-danger:hover {
+    background-color: darkred;
+    border-color: darkred;
 }
 
-ul li a {
-    display: block;
-    text-decoration: none;
-    text-align: center;
-    padding: 8px 16px;
-}
-
-ul li ul.dropdown li {
-    display: block;
-}
-
-ul li ul.dropdown {
-    width: 100%;
-    background-color: white;
-    position: absolute;
+/* Style for Login button */
+.btn-success {
+    background-color: forestgreen;
+    border-color: forestgreen;
     z-index: 999;
-    display: none;
 }
 
-ul li a:hover {
-    background: lightgray;
-    border-radius: 5px;
-    display: block;
-}
-
-ul li:hover ul.dropdown {
-    display: block;
+.btn-success:hover {
+    background-color: greenyellow;
+    border-color: greenyellow;
 }
