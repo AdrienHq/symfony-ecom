@@ -1,9 +1,12 @@
 {% extends "/admin/admin.html.twig" %}
 
 {% block body %}
-    <p>
-        <a class="btn btn-success btn-sm" href="{{ path('admin.category.create') }}">Create</a>
-    </p>
+    <div class="row justify-content-between p-2">
+        <div class="col"></div>
+        <div class="col-auto">
+            <a class="btn btn-success btn-lg" href="{{ path('admin.category.create') }}">Create</a>
+        </div>
+    </div>
     <div>
         <table class="table">
             <thead>
