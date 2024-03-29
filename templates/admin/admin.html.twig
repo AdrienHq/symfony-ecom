@@ -33,10 +33,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link {{ app.request.attributes.get('_route') == 'admin' ? 'active' : '' }}"
-                           href="{{ path('admin') }}">Admin home</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{ app.request.attributes.get('_route') == 'admin.recipes.index' ? 'active' : '' }}"
                            href="{{ path('admin.recipes.index') }}">Recettes</a>
                     </li>

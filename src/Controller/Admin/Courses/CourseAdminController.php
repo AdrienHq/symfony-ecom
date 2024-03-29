@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Controller\Admin\Recipes;
+namespace App\Controller\Admin\Courses;
 
-use App\Entity\Category;
 use App\Entity\Course;
-use App\Form\CategoryType;
 use App\Form\CourseType;
-use App\Repository\CategoryRepository;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

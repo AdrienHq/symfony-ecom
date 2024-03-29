@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Recipes;
+namespace App\Controller\Admin\Category;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
