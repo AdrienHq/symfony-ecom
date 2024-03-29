@@ -30,7 +30,7 @@ class RecipesRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $this->createQueryBuilder('r')->leftJoin('r.category', 'c')->select('r', 'c'),
             $page,
-            7,
+            10,
             [
                 'distinct' => false,
                 'sortFieldAllowList' => ['r.id', 'r.name', 'r.createdAt', 'r.updatedAt']
