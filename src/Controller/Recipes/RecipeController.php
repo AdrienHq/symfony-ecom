@@ -20,12 +20,14 @@ class RecipeController extends AbstractController
     public function index(int $id, string $slug): Response
     {
         $recipe = $this->recipesRepository->find($id);
+        $recipes = $this->recipesRepository->findAll();
         if ($recipe->getSlug() != $slug) {
             return $this->redirectToRoute("recipe.detail", ['slug' => $recipe->getSlug(), 'id' => $recipe->getId()]);
         }
 
         return $this->render("recipes/show.html.twig", [
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'recipes' => $recipes,
         ]);
     }
 

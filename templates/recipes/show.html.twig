@@ -1,18 +1,55 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ recipe.name }} recipe</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div>
+                    <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
+                </div>
+                <div style="font-style: italic">
+                    {{ recipe.description }}
+                </div>
+                <div >
+                    {{ recipe.duration }} :  minutes
+                </div>
 
-    <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" alt="">
+                <div >
+                    {{ recipe.recipeSteps }} :  minutes
+                </div>
+            </div>
+            <div class="col-4">
+                <div>
+                    {{ recipe.course.name }}
+                    </br>
+                    {% for category in recipe.category %}
+                        {{ category.name }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
-    <div>
-        {{ recipe.description }}
+{#        <div class="row">#}
+{#            <div class="col-9">#}
+{#                <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">#}
+{#            </div>#}
+{#            <div class="col-3">#}
+{#                {{ recipe.course.name }}#}
+{#                </br>#}
+{#                {% for category in recipe.category %}#}
+{#                    {{ category.name }}#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div class="col-8 m-3" style="font-style: italic">#}
+{#                {{ recipe.description }}#}
+{#            </div>#}
+{#            <div class="col-9">#}
+{#                {{ recipe.duration }} :  minutes#}
+{#            </div>#}
+
+{#            <div class="col-9">#}
+{#                {{ recipe.recipeSteps }} :  minutes#}
+{#            </div>#}
+{#        </div>#}
     </div>
-    </br>
-    
-    {% for category in recipe.category %}
-        <p>
-            {{ category.name }}
-        </p>
-    {% endfor %}
 {% endblock %}
