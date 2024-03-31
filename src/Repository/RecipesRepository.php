@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Recipes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -9,8 +10,6 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * @extends ServiceEntityRepository<Recipes>
- *
  * @method Recipes|null find($id, $lockMode = null, $lockVersion = null)
  * @method Recipes|null findOneBy(array $criteria, array $orderBy = null)
  * @method Recipes[]    findAll()
@@ -38,6 +37,18 @@ class RecipesRepository extends ServiceEntityRepository
         );
     }
 
+    public function findSearch(SearchData $data)
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('p', 'c', 'e')
+            ->join('p.category', 'c')
+            ->join('p.course', 'e');
+
+
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Recipes[] Returns an array of Recipes objects
 //     */
@@ -62,4 +73,5 @@ class RecipesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

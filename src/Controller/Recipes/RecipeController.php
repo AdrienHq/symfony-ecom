@@ -2,6 +2,8 @@
 
 namespace App\Controller\Recipes;
 
+use App\Data\SearchData;
+use App\Form\SearchForm;
 use App\Repository\RecipesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,10 +36,18 @@ class RecipeController extends AbstractController
     #[Route('/recipes-list', name: "recipes.list")]
     public function listAllRecipes(RecipesRepository $recipesRepository, Request $request): Response
     {
-        $recipes = $recipesRepository->findRecipesForSpecificPage($request->query->getInt('page', 1));
+//        $recipes = $recipesRepository->findRecipesForSpecificPage($request->query->getInt('page', 1));
+
+//        This is  the filter form
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+        $recipes = $recipesRepository->findSearch($data);
 
         return $this->render("recipes/list.html.twig", [
             'recipes' => $recipes,
+            'form' => $form
         ]);
     }
 }
