@@ -20,3 +20,11 @@
     background-color: greenyellow;
     border-color: greenyellow;
 }
+
+.separator
+{
+    height: 2px;
+    margin: 30px;
+    background-image: radial-gradient(black, white), radial-gradient(black, white);
+    /*background-position: 0, 100%, 0, 100%;*/
+}
