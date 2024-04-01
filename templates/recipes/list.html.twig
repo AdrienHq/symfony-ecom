@@ -8,14 +8,17 @@
                 {% include '/recipes/_filter.html.twig' with {form: form } only %}
             </div>
             <div class="col-md-9">
+                <div class="d-flex justify-content-end mb-2">
+                    {{ knp_pagination_sortable(recipes, 'Duration', 'p.duration') }}
+                </div>
                 <div class="grid">
                     {% for recipe in recipes %}
                         {% include '/recipes/recipeCard.html.twig' with {recipe: recipe } only %}
                     {% endfor %}
                 </div>
-{#                <div class="pagination">#}
-{#                    {{ knp_pagination_render(recipes) }}#}
-{#                </div>#}
+                <div class="pagination">
+                    {{ knp_pagination_render(recipes) }}
+                </div>
             </div>
         </div>
     </div>

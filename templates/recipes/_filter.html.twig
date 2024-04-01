@@ -1,5 +1,5 @@
 {{ form_start(form, {attr: {class: 'filter'}}) }}
-{{ form_row(form.keyword) }}
+{{ form_row(form.q) }}
 
 <h4>Ingredients</h4>
 {{ form_row(form.category) }}
@@ -14,6 +14,7 @@
         {{ form_row(form.maxDuration) }}
     </div>
 </div>
+
 <h4>Vegetarian ?</h4>
 {{ form_row(form.vegetarian) }}
 
