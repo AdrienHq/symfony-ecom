@@ -8,7 +8,7 @@ use App\Entity\Course;
 class SearchData
 {
     public int $page = 1;
-    public string $keyword = '';
+    public string $q = '';
     /**
      * @var Category[]
      */
@@ -21,5 +21,13 @@ class SearchData
     public ?int $minDuration;
     public bool $vegetarian;
 
-
+    public function __construct()
+    {
+        $this->q = '';
+        $this->category = null;
+        $this->course = null;
+        $this->maxDuration = null;
+        $this->minDuration = null;
+        $this->vegetarian = false;
+    }
 }
