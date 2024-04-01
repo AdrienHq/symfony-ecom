@@ -33,7 +33,7 @@ class CourseController extends AbstractController
 
         $recipes = $recipesRepository->findSearchForCourse($data);
 
-        return $this->render("recipes/list.html.twig", [
+        return $this->render("course/list.html.twig", [
             'course' => $course,
             'recipes' => $recipes,
             'form' => $form

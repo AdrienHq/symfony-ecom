@@ -3,6 +3,7 @@
 namespace App\Form\course;
 
 use App\Data\category\SearchDataCategory;
+use App\Data\course\SearchDataCourse;
 use App\Data\recipe\SearchData;
 use App\Entity\Category;
 use App\Entity\Course;
@@ -58,7 +59,7 @@ class SearchFormCourse extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => SearchDataCategory::class,
+            'data_class' => SearchDataCourse::class,
             'method' => 'GET',
             'csrf_protection' => false
         ]);
