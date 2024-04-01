@@ -101,6 +101,9 @@ class Recipes
     #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
     private ?File $thumbnailFile = null;
 
+    #[ORM\Column]
+    private ?bool $vegetarian = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -291,6 +294,18 @@ class Recipes
     public function setThumbnailFile(?File $thumbnailFile): static
     {
         $this->thumbnailFile = $thumbnailFile;
+        return $this;
+    }
+
+    public function isVegetarian(): ?bool
+    {
+        return $this->vegetarian;
+    }
+
+    public function setVegetarian(bool $vegetarian): static
+    {
+        $this->vegetarian = $vegetarian;
+
         return $this;
     }
 }
