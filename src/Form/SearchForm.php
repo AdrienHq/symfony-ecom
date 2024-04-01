@@ -18,9 +18,10 @@ class SearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('keyword', TextType::class, [
+            ->add('q', TextType::class, [
                 'label' => false,
                 'required' => false,
+                'empty_data' => '',
                 'attr' => [
                     'placeholder' => "Search"
                 ]
@@ -30,7 +31,7 @@ class SearchForm extends AbstractType
                 'required' => false,
                 'class' => Category::class,
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => false
             ])
             ->add('course', EntityType::class, [
                 'label' => false,
@@ -56,7 +57,8 @@ class SearchForm extends AbstractType
             ->add('vegetarian', CheckboxType::class, [
                 'label' => 'Vegetarian ?',
                 'required' => false
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
