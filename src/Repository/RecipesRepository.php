@@ -61,7 +61,7 @@ class RecipesRepository extends ServiceEntityRepository
 
         if (!empty($search->maxDuration)) {
             $query = $query
-                ->andWhere('p.duration >= :maxDuration')
+                ->andWhere('p.duration <= :maxDuration')
                 ->setParameter('maxDuration', $search->maxDuration);
         }
 
@@ -113,7 +113,7 @@ class RecipesRepository extends ServiceEntityRepository
 
         if (!empty($search->maxDuration)) {
             $query = $query
-                ->andWhere('p.duration >= :maxDuration')
+                ->andWhere('p.duration <= :maxDuration')
                 ->setParameter('maxDuration', $search->maxDuration);
         }
 
