@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
-use App\Data\SearchData;
+use App\Data\category\SearchDataCategory;
+use App\Data\recipe\SearchData;
 use App\Entity\Recipes;
+use App\Form\category\SearchFormCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -72,6 +74,52 @@ class RecipesRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere('c.id IN (:category)')
                 ->setParameter('category', $search->category);
+        }
+
+        if (!empty($search->course)) {
+            $query = $query
+                ->andWhere('e.id IN (:course)')
+                ->setParameter('course', $search->course);
+        }
+
+        $query = $query->getQuery();
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            9
+        );
+    }
+
+    public function findSearchForCategory(SearchDataCategory $search): PaginationInterface
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('p', 'c', 'e')
+            ->join('p.category', 'c')
+            ->join('p.course', 'e');
+
+        if ($search->q !== '') {
+            $query = $query
+                ->andWhere('p.name LIKE :q ')
+                ->setParameter('q', "%{$search->q}%");
+        }
+
+        if (!empty($search->minDuration)) {
+            $query = $query
+                ->andWhere('p.duration >= :minDuration')
+                ->setParameter('minDuration', $search->minDuration);
+        }
+
+        if (!empty($search->maxDuration)) {
+            $query = $query
+                ->andWhere('p.duration >= :maxDuration')
+                ->setParameter('maxDuration', $search->maxDuration);
+        }
+
+        if (!empty($search->vegetarian)) {
+            $query = $query
+                ->andWhere('p.vegetarian = 1');
         }
 
         if (!empty($search->course)) {
