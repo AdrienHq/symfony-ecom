@@ -3,7 +3,7 @@
 namespace App\Controller\Admin\Courses;
 
 use App\Entity\Course;
-use App\Form\CourseType;
+use App\Form\course\CourseType;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

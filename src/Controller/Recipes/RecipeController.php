@@ -2,8 +2,8 @@
 
 namespace App\Controller\Recipes;
 
-use App\Data\SearchData;
-use App\Form\SearchForm;
+use App\Data\recipe\SearchData;
+use App\Form\recipe\SearchForm;
 use App\Repository\RecipesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
