@@ -2,9 +2,7 @@
 
 namespace App\Form\course;
 
-use App\Data\category\SearchDataCategory;
 use App\Data\course\SearchDataCourse;
-use App\Data\recipe\SearchData;
 use App\Entity\Category;
 use App\Entity\Course;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -28,10 +26,10 @@ class SearchFormCourse extends AbstractType
                     'placeholder' => "Search"
                 ]
             ])
-            ->add('course', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'label' => false,
                 'required' => false,
-                'class' => Course::class,
+                'class' => Category::class,
                 'expanded' => true,
                 'multiple' => false
             ])

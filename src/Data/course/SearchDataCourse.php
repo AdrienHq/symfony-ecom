@@ -10,9 +10,9 @@ class SearchDataCourse
     public int $page = 1;
     public string $q = '';
     /**
-     * @var Course[]
+     * @var Category[]
      */
-    public $course;
+    public $category;
     public ?int $maxDuration;
     public ?int $minDuration;
     public bool $vegetarian;
