@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\category;
 
 use App\Entity\Category;
-use App\Entity\Recipes;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;

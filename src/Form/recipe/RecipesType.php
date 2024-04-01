@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\recipe;
 
 use App\Entity\Category;
 use App\Entity\Course;
 use App\Entity\Recipes;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
@@ -19,7 +18,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-use Symfony\Component\Validator\Constraints\Image;
 
 class RecipesType extends AbstractType
 {

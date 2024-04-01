@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\recipe;
 
-use App\Data\SearchData;
+use App\Data\recipe\SearchData;
 use App\Entity\Category;
 use App\Entity\Course;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

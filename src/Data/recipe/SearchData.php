@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\recipe;
 
 use App\Entity\Category;
 use App\Entity\Course;
