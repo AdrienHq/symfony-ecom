@@ -30,7 +30,7 @@ class CategoryController extends AbstractController
         $form = $this->createForm(SearchFormCategory::class, $data);
         $form->handleRequest($request);
 
-        $recipes = $recipesRepository->findSearchForCategory($data);
+        $recipes = $recipesRepository->findSearchForCategory($id, $data);
 
         return $this->render("category/list.html.twig", [
             'category' => $category,

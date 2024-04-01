@@ -31,7 +31,7 @@ class CourseController extends AbstractController
         $form = $this->createForm(SearchFormCourse::class, $data);
         $form->handleRequest($request);
 
-        $recipes = $recipesRepository->findSearchForCourse($data);
+        $recipes = $recipesRepository->findSearchForCourse($id, $data);
 
         return $this->render("course/list.html.twig", [
             'course' => $course,

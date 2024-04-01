@@ -92,13 +92,15 @@ class RecipesRepository extends ServiceEntityRepository
         );
     }
 
-    public function findSearchForCategory(SearchDataCategory $search): PaginationInterface
+    public function findSearchForCategory(int $id, SearchDataCategory $search): PaginationInterface
     {
         $query = $this
             ->createQueryBuilder('p')
             ->select('p', 'c', 'e')
             ->join('p.category', 'c')
-            ->join('p.course', 'e');
+            ->join('p.course', 'e')
+            ->where('c.id = :id')
+            ->setParameter('id', $id);
 
         if ($search->q !== '') {
             $query = $query
@@ -138,13 +140,15 @@ class RecipesRepository extends ServiceEntityRepository
         );
     }
 
-    public function findSearchForCourse(SearchDataCourse $search): PaginationInterface
+    public function findSearchForCourse(int $id, SearchDataCourse $search): PaginationInterface
     {
         $query = $this
             ->createQueryBuilder('p')
             ->select('p', 'c', 'e')
             ->join('p.category', 'c')
-            ->join('p.course', 'e');
+            ->join('p.course', 'e')
+            ->where('e.id = :id')
+            ->setParameter('id', $id);
 
         if ($search->q !== '') {
             $query = $query
