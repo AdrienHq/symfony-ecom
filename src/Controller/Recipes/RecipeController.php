@@ -36,10 +36,9 @@ class RecipeController extends AbstractController
     #[Route('/recipes-list', name: "recipes.list")]
     public function listAllRecipes(RecipesRepository $recipesRepository, Request $request): Response
     {
-//        $recipes = $recipesRepository->findRecipesForSpecificPage($request->query->getInt('page', 1));
 
-//        This is  the filter form
         $data = new SearchData();
+        $data->page = $request->query->getInt('page', 1);
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
 
