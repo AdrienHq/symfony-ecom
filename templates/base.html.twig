@@ -13,7 +13,7 @@
 {% include 'partials/flash.html.twig' %}
 {% include 'components/navbar.html.twig' %}
 {% block body %}
-    {% include 'components/hero.html.twig' %}
+    {% include 'components/hero.html.twig' with {recipes : randomRecipes} only %}
 {% endblock %}
 {% block footer %}
     {% include 'components/footer.html.twig' %}

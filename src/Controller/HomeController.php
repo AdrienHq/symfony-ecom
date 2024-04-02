@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CategoryRepository;
 use App\Repository\CourseRepository;
+use App\Repository\RecipesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,7 +13,8 @@ class HomeController extends AbstractController
 {
     public function __construct(
         private readonly CategoryRepository $categoryRepository,
-        private readonly CourseRepository   $courseRepository
+        private readonly CourseRepository   $courseRepository,
+        private readonly RecipesRepository  $recipesRepository
     )
     {
     }
@@ -20,7 +22,11 @@ class HomeController extends AbstractController
     #[Route('/', name: "index")]
     public function index(): Response
     {
-        return $this->render("base.html.twig");
+        $randomResult = $this->recipesRepository->findPreciseNumberOfResult(3);
+
+        return $this->render("base.html.twig",[
+            "randomRecipes" => $randomResult
+        ]);
     }
 
     public function renderCategoriesFragmentNavbar(): Response
