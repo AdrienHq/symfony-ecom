@@ -1,16 +1,20 @@
 {% block hero %}
     <main role="main" class="container">
         <div class="row">
-            <h2 class="blog-post-title mt-5 mb-5 text-center" style="font-size: 45px;">Hey! Welcome to my cooking website!</h2>
+            <h2 class="blog-post-title mt-5 mb-5 text-center" style="font-size: 45px;">Hey! Welcome to my cooking
+                website!</h2>
             <div class="col-md-8 blog-main mt-5">
                 <div class="blog-post">
                     {% include '/components/carousel.html.twig'  with {recipes : recipes} only %}
                     <p class="blog-post-meta"></p>
                     <p>I enjoy cooking and coding...</p>
                     <hr>
-                    <p>This website provided an opportunity for me to enhance my development skills and keep them up-to-date.</p>
-                    <p>You'll find some of my favorite recipes here. I often find myself forgetting recipes that I love or lacking inspiration for dinner.
-                        This website serves primarily as an archive and resource guide for those who feel lost when mealtime approaches.</p>
+                    <p>This website provided an opportunity for me to enhance my development skills and keep them
+                        up-to-date.</p>
+                    <p>You'll find some of my favorite recipes here. I often find myself forgetting recipes that I love
+                        or lacking inspiration for dinner.
+                        This website serves primarily as an archive and resource guide for those who feel lost when
+                        mealtime approaches.</p>
                     <p>I hope it will be helpful to some of you :)</p>
                 </div>
                 <div class="mt-5">
@@ -22,42 +26,66 @@
                 </div>
             </div>
 
-            <aside class="col-md-4 blog-sidebar mt-4">
-                <div class="p-3 mb-3 bg-light rounded">
-                    <h4 class="font-italic">About</h4>
-                    <p class="mb-0">I am <em>Adrien Hecq</em>, a young dude passionate about cooking and coding.</p>
-                </div>
+            <aside class="col-md-4 blog-sidebar mt-4" style="background-color: lightgrey; border-radius: 25px;">
+                {% for recipe in popularRecipes %}
+                    <div class="p-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3 class="font-italic">{{ recipe.name }}</h3>
+                                <p style="font-size: 12px;">Views: {{ recipe.numberViews }}</p>
+                                <div class="row" style="justify-content: space-between; align-items: center;">
+                                    {% for ingredient in recipe.category %}
+                                        <span class="col" style="background-color: indianred; border-radius: 5px;">
+                                            {{ ingredient.name|default('') }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
+                                   style="text-decoration: none; color: lightslategrey;">
+                                    <img src="{{ asset('images/recipes/screenshot-from-2024-02-20-16-19-52-65e731687fe2a542498343.png') }}"
+                                         alt="image#" .{{ recipe.id }} class="d-block" style="width:100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {#                <div class="p-3 mb-3 bg-light rounded"> #}
+                {#                    <h4 class="font-italic">About</h4> #}
+                {#                    <p class="mb-0">I am <em>Adrien Hecq</em>, a young dude passionate about cooking and coding.</p> #}
+                {#                </div> #}
 
-                <div class="p-3">
-                    <h4 class="font-italic">Progamming Languages</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a>Php 8.2</a></li>
-                        <li><a>HTML</a></li>
-                        <li><a>JavaScript</a></li>
-                    </ol>
-                </div>
-                <div class="p-3">
-                    <h4 class="font-italic">Libraries & Frameworks</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a>Symfony</a></li>
-                        <li><a>React</a></li>
-                        <li><a>Bootstrap</a></li>
-                    </ol>
-                </div>
-                <div class="p-3">
-                    <h4 class="font-italic">Database</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a>MySQL</a></li>
-                        <li><a>Doctrine</a></li>
-                    </ol>
-                </div>
-                <div class="p-3">
-                    <h4 class="font-italic">Database</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a>MySQL</a></li>
-                        <li><a>Doctrine</a></li>
-                    </ol>
-                </div>
+                {#                <div class="p-3"> #}
+                {#                    <h4 class="font-italic">Progamming Languages</h4> #}
+                {#                    <ol class="list-unstyled mb-0"> #}
+                {#                        <li><a>Php 8.2</a></li> #}
+                {#                        <li><a>HTML</a></li> #}
+                {#                        <li><a>JavaScript</a></li> #}
+                {#                    </ol> #}
+                {#                </div> #}
+                {#                <div class="p-3"> #}
+                {#                    <h4 class="font-italic">Libraries & Frameworks</h4> #}
+                {#                    <ol class="list-unstyled mb-0"> #}
+                {#                        <li><a>Symfony</a></li> #}
+                {#                        <li><a>React</a></li> #}
+                {#                        <li><a>Bootstrap</a></li> #}
+                {#                    </ol> #}
+                {#                </div> #}
+                {#                <div class="p-3"> #}
+                {#                    <h4 class="font-italic">Database</h4> #}
+                {#                    <ol class="list-unstyled mb-0"> #}
+                {#                        <li><a>MySQL</a></li> #}
+                {#                        <li><a>Doctrine</a></li> #}
+                {#                    </ol> #}
+                {#                </div> #}
+                {#                <div class="p-3"> #}
+                {#                    <h4 class="font-italic">Database</h4> #}
+                {#                    <ol class="list-unstyled mb-0"> #}
+                {#                        <li><a>MySQL</a></li> #}
+                {#                        <li><a>Doctrine</a></li> #}
+                {#                    </ol> #}
+                {#                </div> #}
             </aside>
         </div>
     </main>
