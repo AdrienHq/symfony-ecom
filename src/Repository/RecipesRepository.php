@@ -27,6 +27,18 @@ class RecipesRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipes::class);
     }
 
+    public function findPreciseNumberOfResult(int $numberOfResult): array
+    {
+        $allRecords = $this->findAll();
+
+        // Shuffle the array randomly
+        shuffle($allRecords);
+
+        // Take the first three elements
+        return array_slice($allRecords, 0, $numberOfResult);
+    }
+
+
     public function findRecipesForSpecificPage(int $page): PaginationInterface
     {
         return $this->paginator->paginate(
