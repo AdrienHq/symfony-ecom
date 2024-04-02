@@ -104,6 +104,9 @@ class Recipes
     #[ORM\Column]
     private ?bool $vegetarian = null;
 
+    #[ORM\Column]
+    private ?int $numberViews = 0;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -305,6 +308,18 @@ class Recipes
     public function setVegetarian(bool $vegetarian): static
     {
         $this->vegetarian = $vegetarian;
+
+        return $this;
+    }
+
+    public function getNumberViews(): ?int
+    {
+        return $this->numberViews;
+    }
+
+    public function setNumberViews(int $numberViews): static
+    {
+        $this->numberViews = $numberViews;
 
         return $this;
     }
