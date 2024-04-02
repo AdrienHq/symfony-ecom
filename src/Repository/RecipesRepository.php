@@ -38,6 +38,15 @@ class RecipesRepository extends ServiceEntityRepository
         return array_slice($allRecords, 0, $numberOfResult);
     }
 
+    public function findRecipesOrderedByPopularity(int $numberRecipes)
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.numberViews', 'DESC')
+            ->setMaxResults($numberRecipes)
+            ->getQuery()
+            ->getResult();
+    }
+
 
     public function findRecipesForSpecificPage(int $page): PaginationInterface
     {
