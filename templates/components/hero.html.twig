@@ -1,9 +1,10 @@
 {% block hero %}
     <main role="main" class="container">
         <div class="row">
-            <h2 class="blog-post-title mt-5 mb-5 text-center" style="font-size: 45px;">Hey! Welcome to my cooking
-                website!</h2>
-            <div class="col-md-8 blog-main mt-5">
+            <h2 class="blog-post-title mt-5 mb-5 text-center" style="font-size: 45px;">
+                Hey! Welcome to my cooking website!
+            </h2>
+            <div class="col-md-8 blog-main mt-4">
                 <div class="blog-post">
                     {% include '/components/carousel.html.twig'  with {recipes : recipes} only %}
                     <p class="blog-post-meta"></p>
@@ -34,7 +35,9 @@
                                 <h3 class="font-italic">{{ recipe.name }}</h3>
                                 <p style="font-size: 12px;">Views: {{ recipe.numberViews }}</p>
                                 {% for category in recipe.category %}
-                                    <span style="margin-right: 5px; border-radius: 10%; padding: 5px 10px; background-color: lightblue">{{ category.name | default('') }}</span>
+                                    <span style="margin-right: 5px; border-radius: 10%; padding: 5px 10px; background-color: lightblue">
+                                        {{ category.name | default('') }}
+                                    </span>
                                 {% endfor %}
                             </div>
                             <div class="col-md-4">
