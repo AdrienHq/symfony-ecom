@@ -5,7 +5,11 @@
         <div class="row">
             <div class="col-8">
                 <div>
-                    <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
+                    {% if recipe.thumbnail is not empty %}
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
+                    {% else %}
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
+                    {% endif %}
                 </div>
                 <div style="font-style: italic">
                     {{ recipe.description }}

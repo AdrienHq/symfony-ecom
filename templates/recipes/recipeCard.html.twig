@@ -1,9 +1,9 @@
 <div class="card">
-    <img
-            src="{{ asset('images/recipes/screenshot-from-2024-02-20-16-19-52-65e731687fe2a542498343.png') }}"
-            alt=""
-            class="card-img-top"
-    >
+    {% if recipe.thumbnail is not empty %}
+        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="card-img-top" alt="">
+    {% else %}
+        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="card-img-top">
+    {% endif %}
     <div class="card-body">
         <h2 class="card-title">{{ recipe.name|default("") }}</h2>
         <div class="card-title">

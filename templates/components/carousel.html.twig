@@ -13,22 +13,30 @@
         {% for recipe in recipes %}
             {% if loop.first %}
                 <div class="carousel-item active">
-                    <img src="{{ asset('images/recipes/screenshot-from-2024-02-20-16-19-52-65e731687fe2a542498343.png') }}"
-                         alt="image#" .{{ recipe.id }} class="d-block" style="width:100%">
+                    {% if recipe.thumbnail is not empty %}
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
+                    {% else %}
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
+                    {% endif %}
                     <div class="carousel-caption">
                         <h3>{{ recipe.name }}</h3>
-                        <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8" style="text-decoration: none; color: lightslategrey;">
+                        <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
+                           style="text-decoration: none; color: lightslategrey;">
                             Lire la suite
                         </a>
                     </div>
                 </div>
             {% else %}
                 <div class="carousel-item">
-                    <img src="{{ asset('images/recipes/screenshot-from-2024-02-20-16-19-52-65e731687fe2a542498343.png') }}"
-                         alt="image#" .{{ recipe.id }} class="d-block" style="width:100%">
+                    {% if recipe.thumbnail is not empty %}
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
+                    {% else %}
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
+                    {% endif %}
                     <div class="carousel-caption">
                         <h3>{{ recipe.name }}</h3>
-                        <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8" style="text-decoration: none; color: lightslategrey;">
+                        <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
+                           style="text-decoration: none; color: lightslategrey;">
                             Lire la suite
                         </a>
                     </div>
