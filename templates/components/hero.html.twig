@@ -33,13 +33,9 @@
                             <div class="col-md-8">
                                 <h3 class="font-italic">{{ recipe.name }}</h3>
                                 <p style="font-size: 12px;">Views: {{ recipe.numberViews }}</p>
-                                <div class="row" style="justify-content: space-between; align-items: center;">
-                                    {% for ingredient in recipe.category %}
-                                        <span class="col" style="background-color: indianred; border-radius: 5px;">
-                                            {{ ingredient.name|default('') }}
-                                        </span>
-                                    {% endfor %}
-                                </div>
+                                {% for category in recipe.category %}
+                                    <span style="margin-right: 5px; border-radius: 10%; padding: 5px 10px; background-color: lightblue">{{ category.name | default('') }}</span>
+                                {% endfor %}
                             </div>
                             <div class="col-md-4">
                                 <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
