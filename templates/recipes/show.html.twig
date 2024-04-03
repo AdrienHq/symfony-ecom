@@ -3,7 +3,15 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-8 mb-5 mt-3">
+                <h1 style="text-align: center">{{ recipe.name|default('') }}</h1>
+            </div>
+            <div style="text-align: end" class="col-4">
+                <button  class="btn btn-lg btn-success">Print the recipe</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
                 <div>
                     {% if recipe.thumbnail is not empty %}
                         <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
@@ -11,20 +19,33 @@
                         <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
                     {% endif %}
                 </div>
-                <div style="font-style: italic">
+                <div class="mt-5" style="font-style: italic">
                     {{ recipe.description }}
                 </div>
-                <div >
-                    {{ recipe.duration }} :  minutes
-                </div>
-
-                <div >
-                    {{ recipe.recipeSteps }} :  minutes
+                <div class="mt-5" >
+                    {{ recipe.recipeSteps }}
                 </div>
             </div>
-            <div class="col-4">
-                <div>
+            <div class="col-2" style="background-color: lightsteelblue; border-radius: 45px;">
+                <div class="mt-5" style="margin-left: 1rem;">
+                    <h3>Course type :</h3>
                     {{ recipe.course.name }}
+                    </br>
+                </div>
+                <div class="mt-5" style="margin-left: 1rem;">
+                    <h3>Duration</h3>
+                    {% if (recipe.duration // 60) > 0 %}
+                        {{ (recipe.duration // 60) ~ ' hour ' }}
+                    {% endif %}
+                    {{ (recipe.duration % 60) ~ ' minutes' }}
+                </div>
+                <div class="mt-5" style="margin-left: 1rem;">
+                    <h3>Notation</h3>
+                    </br>
+                    etoiles
+                </div>
+                <div class="mt-5" style="margin-left: 1rem;">
+                    <h3>Ingredients</h3>
                     </br>
                     {% for category in recipe.category %}
                         {{ category.name }}
@@ -32,28 +53,5 @@
                 </div>
             </div>
         </div>
-
-{#        <div class="row">#}
-{#            <div class="col-9">#}
-{#                <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">#}
-{#            </div>#}
-{#            <div class="col-3">#}
-{#                {{ recipe.course.name }}#}
-{#                </br>#}
-{#                {% for category in recipe.category %}#}
-{#                    {{ category.name }}#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#            <div class="col-8 m-3" style="font-style: italic">#}
-{#                {{ recipe.description }}#}
-{#            </div>#}
-{#            <div class="col-9">#}
-{#                {{ recipe.duration }} :  minutes#}
-{#            </div>#}
-
-{#            <div class="col-9">#}
-{#                {{ recipe.recipeSteps }} :  minutes#}
-{#            </div>#}
-{#        </div>#}
     </div>
 {% endblock %}
