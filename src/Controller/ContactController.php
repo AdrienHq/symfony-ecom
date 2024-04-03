@@ -19,9 +19,9 @@ class ContactController extends AbstractController
         $data = new ContactDTO();
 
 //         TODO FOR TEST PURPOSE SUPPRESS LATER
-        $data->name = 'AdrienHq';
-        $data->email = 'testEmail@test.com';
-        $data->message = 'Hello je test la form';
+        $data->name = 'yourName';
+        $data->email = 'yourEmail@mailcom';
+        $data->message = 'Your super message';
 
 
         $form = $this->createForm(ContactType::class, $data);
