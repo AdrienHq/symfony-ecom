@@ -53,5 +53,9 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="margin-top: 95px">
+                <h3>Other recipes that may interest you ? </h3>
+                {{ render(controller('App\\Controller\\Recipes\\RecipeController::renderRecommendedRecipes')) }}
+        </div>
     </div>
 {% endblock %}
