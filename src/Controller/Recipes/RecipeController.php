@@ -49,4 +49,11 @@ class RecipeController extends AbstractController
             'form' => $form
         ]);
     }
+
+    public function renderRecommendedRecipes(): Response
+    {
+        return $this->render("fragments/_recommendation.html.twig", [
+            'recommendedRecipes' => $this->recipesRepository->findPreciseNumberOfResult(4),
+        ]);
+    }
 }

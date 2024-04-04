@@ -1,0 +1,22 @@
+{% for recipe in recommendedRecipes %}
+    {#    {{ recipe.name | default('') }} #}
+    <div class="col-3">
+        <div class="card" style="width: 18rem;">
+            {% if recipe.thumbnail is not empty %}
+                <div class="image-container">
+                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="{{ recipe.name }}">
+                        <div class="overlay">{{ recipe.name }}</div>
+                    </a>
+                </div>
+            {% else %}
+                <div class="image-container">
+                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
+                        <div class="overlay">{{ recipe.name }}</div>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
