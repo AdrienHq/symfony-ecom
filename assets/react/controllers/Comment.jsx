@@ -10,8 +10,8 @@ const dateFormat = {
     timeStyle: 'short',
 }
 
-function Comments() {
-    const {items: comments, load, loading, count, hasMore} = usePaginatedFetch('/api/comments')
+function Comments({recipe, user}) {
+    const {items: comments, load, loading, count, hasMore} = usePaginatedFetch('/api/comments?recipe=' + recipe)
 
     useEffect(() => {
         load()
@@ -19,7 +19,6 @@ function Comments() {
 
     return (
         <div>
-            {loading && 'Loading ...'}
             <Title count={count}/>
             {comments.map(c => <Comment key={c.id} comment={c}/>)}
             {hasMore &&
@@ -62,14 +61,17 @@ const Comment = React.memo(({comment}) => {
 
 class CommentsElements extends HTMLElement {
     connectedCallback() {
+        const recipe = parseInt(this.dataset.recipe, 10);
+        const user = parseInt(this.dataset.user, 10);
+
         const root = createRoot(this);
-        root.render(<Comments/>);
+        root.render(<Comments recipe={recipe} user={user} />);
     }
 
-    disconnectdCallback() {
+    disconnectedCallback() {
         unmountComponentAtNode(this)
     }
 
 }
 
-customElements.define('post-comments', CommentsElements);
+customElements.define('recipe-comments', CommentsElements);

@@ -24,14 +24,13 @@ use Symfony\Component\Serializer\Attribute\Groups;
         ),
         new GetCollection(
             uriTemplate: '/comments',
-            paginationEnabled: true,
-            paginationItemsPerPage: 6,
+            paginationEnabled: false,
             normalizationContext: ['groups' => [Comment::ITEM], 'skip_null_values' => false],
             name: 'api_comments_get_collection',
         ),
     ]
 )]
-#[ApiFilter(SearchFilter::class, properties: ['recipe' => SearchFilterInterface::STRATEGY_EXACT] )]
+#[ApiFilter(SearchFilter::class, properties: ['recipe' => SearchFilterInterface::STRATEGY_EXACT])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
