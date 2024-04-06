@@ -2,28 +2,57 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use App\Provider\Comment\CommentGetProvider;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/comment/{id}',
+            normalizationContext: ['groups' => [Comment::ITEM], 'skip_null_values' => false],
+            name: 'api_comment_get',
+            provider: CommentGetProvider::class,
+        ),
+        new GetCollection(
+            uriTemplate: '/comments',
+            paginationEnabled: true,
+            paginationItemsPerPage: 6,
+            normalizationContext: ['groups' => [Comment::ITEM], 'skip_null_values' => false],
+            name: 'api_comments_get_collection',
+        ),
+    ]
+)]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    const ITEM = 'COMMENTS_ITEM';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups([Comment::ITEM])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[Groups([Comment::ITEM])]
     private ?Recipes $recipe = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups([Comment::ITEM])]
     private ?string $content = null;
 
     #[ORM\Column]
+    #[Groups([Comment::ITEM])]
     private ?\DateTimeImmutable $publishedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[Groups([Comment::ITEM])]
     private ?User $author = null;
 
     public function getId(): ?int
