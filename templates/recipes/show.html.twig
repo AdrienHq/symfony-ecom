@@ -25,10 +25,11 @@
                 <div class="mt-5" >
                     {{ recipe.recipeSteps }}
                 </div>
+                <post-comments data-post="{{ recipe.id }}" data-user="{{ app.user ? app.user.id : 0  }}"></post-comments>
             </div>
             <div class="col-2" style="background-color: lightsteelblue; border-radius: 45px;">
                 <div class="mt-5" style="margin-left: 1rem;">
-                    <h3>Course type :</h3>
+                    <h3>Course type </h3>
                     {{ recipe.course.name }}
                     </br>
                 </div>
