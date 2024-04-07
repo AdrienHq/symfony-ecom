@@ -1,9 +1,9 @@
 import React from "../../vendor/react/react.index";
-import {render, unmountComponentAtNode} from "react-dom";
-import {usePaginatedFetch} from "../hooks/useComments";
-import {useEffect} from "react";
-import {Icon} from "../components/Icon";
+import {unmountComponentAtNode} from "react-dom";
+import {useFetch, usePaginatedFetch} from "../hooks/useComments";
+import {useCallback, useEffect, useRef} from "react";
 import {createRoot} from "react-dom/client";
+import {Field} from "../components/Form";
 
 const dateFormat = {
     dateStyle: 'medium',
@@ -11,7 +11,19 @@ const dateFormat = {
 }
 
 function Comments({recipe, user}) {
-    const {items: comments, load, loading, count, hasMore} = usePaginatedFetch('/api/comments?recipe=' + recipe)
+    const {
+        items: comments,
+        setItems: setComments,
+        load,
+        loading,
+        count,
+        hasMore
+    } = usePaginatedFetch('/api/comments?recipe=' + recipe)
+
+    const addComment = useCallback(comments => {
+        setComments(comments => [comment, ...comments])
+
+    }, [])
 
     useEffect(() => {
         load()
@@ -20,6 +32,7 @@ function Comments({recipe, user}) {
     return (
         <div>
             <Title count={count}/>
+            {user && <CommentForm recipe={recipe} onComment={addComment}/>}
             {comments.map(c => <Comment key={c.id} comment={c}/>)}
             {hasMore &&
                 <button disabled={loading} className="btn btn-primary" onClick={load}>
@@ -29,6 +42,52 @@ function Comments({recipe, user}) {
         </div>
     );
 }
+
+const CommentForm = React.memo(({recipe, onComment}) => {
+    const ref = useRef(null)
+    const onSuccess = useCallback(comment => {
+        onComment(comment)
+        ref.current.value = ''
+    }, [ref, onComment])
+
+    const {load, loading, errors, clearError} = useFetch('/api/comments/'+{recipe}, 'POST', onSuccess)
+    const onSubmit = useCallback(e => {
+        e.preventDefault()
+        load({
+            content: ref.current.value,
+            recipe: "/api/recipes/" + recipe
+        })
+    }, [load, ref, recipe])
+
+    return (
+        <div className="p-3 mt-4 mb-2 bg-secondary text-white border-4">
+            <form className="m-2" onSubmit={onSubmit}>
+                <fieldset>
+                    <legend>
+                        Leave a comment
+                    </legend>
+                </fieldset>
+                <Field
+                    className="m-2"
+                    name="content"
+                    help="Please be respectful in the comments section ! <3"
+                    ref={ref} error="Your comment is too short"
+                    required
+                    minLength={5}
+                    onChange={clearError.bind(this, 'content')}
+                    error={errors['content']}
+                >
+                    Your comment
+                </Field>
+                <div className="form-group">
+                    <button className="btn btn-primary disabled={loading}">
+                        Envoyer
+                    </button>
+                </div>
+            </form>
+        </div>
+    )
+})
 
 function Title({count}) {
     return (
@@ -62,10 +121,10 @@ const Comment = React.memo(({comment}) => {
 class CommentsElements extends HTMLElement {
     connectedCallback() {
         const recipe = parseInt(this.dataset.recipe, 10);
-        const user = parseInt(this.dataset.user, 10);
+        const user = parseInt(this.dataset.user, 10) || null;
 
         const root = createRoot(this);
-        root.render(<Comments recipe={recipe} user={user} />);
+        root.render(<Comments recipe={recipe} user={user}/>);
     }
 
     disconnectedCallback() {
