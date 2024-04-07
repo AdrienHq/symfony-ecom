@@ -5,7 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use App\Provider\Recipes\RecipesGetProvider;
+use App\Api\Provider\Recipes\RecipesGetProvider;
 use App\Repository\RecipesRepository;
 use App\Validator\Entry;
 use App\Validator\Sanitizer;
@@ -33,8 +33,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         ),
         new GetCollection(
             uriTemplate: '/recipes',
-            paginationEnabled: true,
-            paginationItemsPerPage: 6,
+            paginationEnabled: false,
             normalizationContext: ['groups' => [Recipes::ITEM], 'skip_null_values' => false],
             name: 'api_recipes_get_collection',
         ),
@@ -47,7 +46,7 @@ class Recipes
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups([Recipes::ITEM])]
+    #[Groups([Recipes::ITEM, Comment::ITEM])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]

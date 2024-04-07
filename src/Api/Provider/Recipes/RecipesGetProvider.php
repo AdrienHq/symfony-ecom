@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Provider\Recipes;
+namespace App\Api\Provider\Recipes;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
