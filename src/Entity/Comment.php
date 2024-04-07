@@ -8,11 +8,15 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use App\Provider\Comment\CommentGetProvider;
+use ApiPlatform\Metadata\Post;
+use App\Api\Processor\CommentPostProcessor;
+use App\Api\Provider\Comment\CommentGetProvider;
+use App\Controller\Api\CreateComment;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
@@ -26,15 +30,23 @@ use Symfony\Component\Serializer\Attribute\Groups;
             uriTemplate: '/comments',
             paginationEnabled: false,
             normalizationContext: ['groups' => [Comment::ITEM], 'skip_null_values' => false],
-            name: 'api_comments_get_collection',
+            name: 'api_comment_get_collection',
         ),
+        new Post(
+            uriTemplate: '/comments/{id}',
+            normalizationContext: ['groups' => [Comment::ITEM]],
+            denormalizationContext: ['groups' => [Comment::POST]],
+            name: 'api_comment_post',
+            processor: CommentPostProcessor::class
+        )
     ]
 )]
 #[ApiFilter(SearchFilter::class, properties: ['recipe' => SearchFilterInterface::STRATEGY_EXACT])]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
-    const ITEM = 'COMMENTS_ITEM';
+    const ITEM = 'COMMENT_ITEM';
+    const POST = 'COMMENT_POST';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -47,7 +59,9 @@ class Comment
     private ?Recipes $recipe = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups([Comment::ITEM])]
+    #[Assert\NotBlank(message: 'comment.blank')]
+    #[Assert\Length(min: 5, max: 10000, minMessage: 'The comment is too short', maxMessage: 'The comment is too long')]
+    #[Groups([Comment::ITEM, Comment::POST])]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -57,6 +71,11 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[Groups([Comment::ITEM])]
     private ?User $author = null;
+
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

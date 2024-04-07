@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Provider\Comment;
+namespace App\Api\Provider\Comment;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
