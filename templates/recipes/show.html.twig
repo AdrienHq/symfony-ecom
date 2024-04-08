@@ -27,33 +27,23 @@
                 </div>
                 {#                                <recipe-comments data-recipe="{{ recipe.id }}" data-user="{{ app.user ? app.user.id : 0  }}"></recipe-comments> #}
                 <div class="mt-5">
-                    <h3>Comments</h3>
-                    <div class="p-3 mt-4 mb-2 bg-secondary text-white border-4">
-                        <form class="m-2">
-                            <fieldset>
-                                <legend>Leave a comment</legend>
-                            </fieldset>
-                            <div class="form-group">
-                                <label for="content">
-                                    Your comment
-                                </label>
-                                <textarea rows="5"
-                                          class="form-control"
-                                          name="content"
-                                          id="content"
-                                          required=""
-                                          minlength="5"></textarea>
-                                <div class="help-block">
-                                    Please be respectful in the comments section ! &lt;3
-                                </div>
+                    <h3 style="text-decoration: underline overline blue;">All the comments for the
+                        recipe {{ recipe.name|default('') }}</h3>
+                    {% if app.user %}
+                        <div class="mt-3">
+                            <h4 class="" style="color: lightslategrey">Write us a feedback :)</h4>
+                            {{ form_start(form) }}
+                            <div class="mt-2 form-floating">
+                                {{ form_widget(form.content, {'attr': {'class': 'form-control', 'style': 'height: 130px;' }}) }}
+                                {{ form_label(form.content ) }}
                             </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary disabled={loading}">
-                                    Envoyer
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            <button class="mt-3 btn btn-lg btn-dark" type="submit" id="button-addon2">
+                                Send
+                            </button>
+                            {{ form_end(form) }}
+                        </div>
+                    {% endif %}
+
 
                     <div>
                         {% for commentIndex, comment in recipe.comments %}
