@@ -25,7 +25,6 @@
                 <div class="mt-5">
                     {{ recipe.recipeSteps }}
                 </div>
-                {#                                <recipe-comments data-recipe="{{ recipe.id }}" data-user="{{ app.user ? app.user.id : 0  }}"></recipe-comments> #}
                 <div class="mt-5">
                     <h3 style="text-decoration: underline overline blue;">All the comments for the
                         recipe {{ recipe.name|default('') }}</h3>
@@ -43,8 +42,6 @@
                             {{ form_end(form) }}
                         </div>
                     {% endif %}
-
-
                     <div>
                         {% for commentIndex, comment in recipe.comments %}
                             {% include 'components/comment.html.twig' with {comment: comment, commentIndex: commentIndex} only %}

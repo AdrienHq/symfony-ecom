@@ -1,4 +1,23 @@
-<div class="row mt-3">
+<div class="mt-4 comment mb-4 position-relative"
+        {% if commentIndex % 2 == 0 %}
+            style="width: 550px"
+        {% else %}
+            style="width: 650px"
+        {% endif %}
+>
+    {% if app.user == comment.author %}
+        <div class="position-absolute top-0 end-0">
+            <form name="" method="post" action="{{ path('comment.delete', {'id': comment.id}) }}">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                <button type="submit" class="p-1 m-2 btn btn-danger">
+                    Delete
+                </button>
+            </form>
+        </div>
+    {% endif %}
+
+
     <div {% if commentIndex % 2 == 0 %}
         class="black p-3 rounded-lg shadow-lg" style="background-color: lightyellow"
     {% else %}
