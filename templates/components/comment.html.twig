@@ -1,0 +1,16 @@
+<div class="row mt-3">
+    <div {% if commentIndex % 2 == 0 %}
+        class="black p-3 rounded-lg shadow-lg" style="background-color: lightyellow"
+    {% else %}
+        class="black p-3 rounded-lg shadow-lg"
+    {% endif %}
+    >
+        <div class="col-sm-9"><h3><strong>{{ comment.author }}</strong></h3></div>
+        <div class="col-sm-9"><p>{{ comment.content }}</p></div>
+        <div class="col-sm-9">
+            <p class="" style="color: grey">
+                Posted at : {{ comment.publishedAt|date("d-m-Y H:i:s") }}
+            </p>
+        </div>
+    </div>
+</div>

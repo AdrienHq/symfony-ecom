@@ -7,7 +7,7 @@
                 <h1 style="text-align: center">{{ recipe.name|default('') }}</h1>
             </div>
             <div style="text-align: end" class="col-4">
-                <button  class="btn btn-lg btn-success">Print the recipe</button>
+                <button class="btn btn-lg btn-success">Print the recipe</button>
             </div>
         </div>
         <div class="row">
@@ -22,10 +22,45 @@
                 <div class="mt-5" style="font-style: italic">
                     {{ recipe.description }}
                 </div>
-                <div class="mt-5" >
+                <div class="mt-5">
                     {{ recipe.recipeSteps }}
                 </div>
-                <recipe-comments data-recipe="{{ recipe.id }}" data-user="{{ app.user ? app.user.id : 0  }}"></recipe-comments>
+                {#                                <recipe-comments data-recipe="{{ recipe.id }}" data-user="{{ app.user ? app.user.id : 0  }}"></recipe-comments> #}
+                <div class="mt-5">
+                    <h3>Comments</h3>
+                    <div class="p-3 mt-4 mb-2 bg-secondary text-white border-4">
+                        <form class="m-2">
+                            <fieldset>
+                                <legend>Leave a comment</legend>
+                            </fieldset>
+                            <div class="form-group">
+                                <label for="content">
+                                    Your comment
+                                </label>
+                                <textarea rows="5"
+                                          class="form-control"
+                                          name="content"
+                                          id="content"
+                                          required=""
+                                          minlength="5"></textarea>
+                                <div class="help-block">
+                                    Please be respectful in the comments section ! &lt;3
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary disabled={loading}">
+                                    Envoyer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div>
+                        {% for commentIndex, comment in recipe.comments %}
+                            {% include 'components/comment.html.twig' with {comment: comment, commentIndex: commentIndex} only %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
             <div class="col-2" style="background-color: lightsteelblue; border-radius: 45px;">
                 <div class="mt-5" style="margin-left: 1rem;">
@@ -55,8 +90,8 @@
             </div>
         </div>
         <div class="row" style="margin-top: 95px">
-                <h3>Other recipes that may interest you ? </h3>
-                {{ render(controller('App\\Controller\\Recipes\\RecipeController::renderRecommendedRecipes')) }}
+            <h3>Other recipes that may interest you ? </h3>
+            {{ render(controller('App\\Controller\\Recipes\\RecipeController::renderRecommendedRecipes')) }}
         </div>
     </div>
 {% endblock %}
