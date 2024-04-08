@@ -25,8 +25,6 @@ export function useRecipesFetch(url) {
         } else {
             console.error(responseData)
         }
-
-        setLoading(false)
     }, [url, next])
     return {
         items,

@@ -50,7 +50,7 @@ const CommentForm = React.memo(({recipe, onComment}) => {
         ref.current.value = ''
     }, [ref, onComment])
 
-    const {load, loading, errors, clearError} = useFetch('/api/comments/'+{recipe}, 'POST', onSuccess)
+    const {load, loading, errors, clearError} = useFetch('/api/comments/'+recipe, 'POST', onSuccess)
     const onSubmit = useCallback(e => {
         e.preventDefault()
         load({
