@@ -10,8 +10,8 @@
     {% endblock %}
 </head>
 <body class="base-body">
-{% include 'partials/flash.html.twig' %}
 {% include 'components/navbar.html.twig' %}
+{% include 'partials/flash.html.twig' %}
 {% block body %}
     {% include 'components/hero.html.twig' with {recipes : randomRecipes, popularRecipes : popularRecipes} only %}
 {% endblock %}
