@@ -63,9 +63,16 @@
                     {{ (recipe.duration % 60) ~ ' minutes' }}
                 </div>
                 <div class="mt-5" style="margin-left: 1rem;">
-                    <h3>Notation</h3>
-                    </br>
-                    etoiles
+                    <h3>Overall rating</h3>
+                    {{ globalRating }}
+                </div>
+                <div class="mt-5" style="margin-left: 1rem;">
+                    <h3>Your rating</h3>
+                    {{ userRating }}
+                </div>
+                <div class="mt-5" style="margin-left: 1rem;">
+                    {{ form_start(formRating) }}
+                    {{ form_end(formRating) }}
                 </div>
                 <div class="mt-5" style="margin-left: 1rem;">
                     <h3>Ingredients</h3>

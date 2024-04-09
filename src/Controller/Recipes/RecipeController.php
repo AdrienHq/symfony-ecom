@@ -4,8 +4,11 @@ namespace App\Controller\Recipes;
 
 use App\Data\recipe\SearchData;
 use App\Entity\Comment;
+use App\Entity\Rating;
 use App\Form\CommentType;
+use App\Form\RatingType;
 use App\Form\recipe\SearchForm;
+use App\Repository\RatingRepository;
 use App\Repository\RecipesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +20,8 @@ class RecipeController extends AbstractController
 {
     public function __construct(
         private readonly RecipesRepository      $recipesRepository,
-        private readonly EntityManagerInterface $em
+        private readonly EntityManagerInterface $em,
+        private readonly RatingRepository       $ratingRepository
     )
     {
     }
@@ -28,12 +32,18 @@ class RecipeController extends AbstractController
         $recipe = $this->recipesRepository->find($id);
         $recipes = $this->recipesRepository->findAll();
 
+        $result = $this->ratingRepository->findAverageRatingForRecipe($recipe->getId());
+
+        // Calculate the average rating
+        $ratingCount = $result[0]['ratingCount'];
+        $totalStars = $result[0]['totalStars'];
+        $averageRating = $ratingCount > 0 ? $totalStars / $ratingCount : 0;
+
         if ($recipe->getSlug() != $slug) {
             return $this->redirectToRoute("recipe.detail", ['slug' => $recipe->getSlug(), 'id' => $recipe->getId()]);
         }
 
         $form = $this->createForm(CommentType::class);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = (new Comment())
@@ -50,10 +60,38 @@ class RecipeController extends AbstractController
             $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
         }
 
+        $formRating = $this->createForm(RatingType::class);
+        $formRating->handleRequest($request);
+        $recipeRating = $this->ratingRepository->findByUserAndRecipe($this->getUser()->getId(), $recipe->getId());
+
+        if ($formRating->isSubmitted() && $formRating->isValid()) {
+            /** @var Rating $recipeRating */
+            if ($recipeRating && $recipeRating->getUser() === $this->getUser() && $recipeRating->getRecipe() === $recipe) {
+                $recipeRating->setStars($formRating->getData()['stars']);
+                $this->em->flush();
+                $this->addFlash('success', 'Your rating was updated !');
+                $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
+            } else {
+                $rating = (new Rating())
+                    ->setUser($this->getUser())
+                    ->setRecipe($recipe)
+                    ->setStars($formRating->getData()['stars']);
+
+                $this->em->persist($rating);
+                $this->em->flush();
+
+                $this->addFlash('success', 'Your rating was saved !');
+                $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
+            }
+        }
+
         return $this->render("recipes/show.html.twig", [
             'recipe' => $recipe,
             'recipes' => $recipes,
-            'form' => $form->createView()
+            'userRating' => $recipeRating !== null ? $recipeRating->getStars() : 0,
+            'globalRating' => $averageRating,
+            'form' => $form->createView(),
+            'formRating' => $formRating->createView()
         ]);
     }
 

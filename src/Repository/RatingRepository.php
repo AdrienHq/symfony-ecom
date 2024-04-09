@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Rating;
+use App\Entity\Recipes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,27 @@ class RatingRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Rating::class);
+    }
+
+    public function findByUserAndRecipe(int $userId, int $recipeId)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.recipe = :recipeId')
+            ->andWhere('r.user = :userId')
+            ->setParameter('recipeId', $recipeId)
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findAverageRatingForRecipe(int $recipeId)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r) as ratingCount', 'SUM(r.stars) as totalStars')
+            ->andWhere('r.recipe = :recipeId')
+            ->setParameter('recipeId', $recipeId)
+            ->getQuery()
+            ->getArrayResult();
     }
 
 //    /**
