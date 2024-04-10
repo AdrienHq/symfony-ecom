@@ -1,0 +1,21 @@
+{% macro renderStars(number) %}
+    {% set fullStars = number|round(0, 'floor') %}
+    {% set halfStar = (number - fullStars) > 0 ? 1 : 0 %}
+    {% set emptyStars = 5 - fullStars - halfStar %}
+
+    {% if fullStars > 0 %}
+        {% for i in 1..fullStars %}
+            <img src="{{ asset('images/fullStar.png') }}" style="width: 20px; height: 20px;" alt="...">
+        {% endfor %}
+    {% endif %}
+
+    {% if halfStar == 1 %}
+        <img src="{{ asset('images/halfStar.png') }}" style="width: 20px; height: 20px;" alt="...">
+    {% endif %}
+
+    {% if emptyStars > 0 %}
+        {% for i in 1..emptyStars %}
+            <img src="{{ asset('images/emptyStar.png') }}" style="width: 20px; height: 20px;" alt="...">
+        {% endfor %}
+    {% endif %}
+{% endmacro %}

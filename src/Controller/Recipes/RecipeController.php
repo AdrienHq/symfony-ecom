@@ -34,7 +34,6 @@ class RecipeController extends AbstractController
 
         $result = $this->ratingRepository->findAverageRatingForRecipe($recipe->getId());
 
-        // Calculate the average rating
         $ratingCount = $result[0]['ratingCount'];
         $totalStars = $result[0]['totalStars'];
         $averageRating = $ratingCount > 0 ? $totalStars / $ratingCount : 0;
@@ -68,6 +67,7 @@ class RecipeController extends AbstractController
             /** @var Rating $recipeRating */
             if ($recipeRating && $recipeRating->getUser() === $this->getUser() && $recipeRating->getRecipe() === $recipe) {
                 $recipeRating->setStars($formRating->getData()['stars']);
+                $averageRating = $ratingCount > 0 ? $totalStars / $ratingCount : 0;
                 $this->em->flush();
                 $this->addFlash('success', 'Your rating was updated !');
                 $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
@@ -76,6 +76,8 @@ class RecipeController extends AbstractController
                     ->setUser($this->getUser())
                     ->setRecipe($recipe)
                     ->setStars($formRating->getData()['stars']);
+
+                $averageRating = $ratingCount > 0 ? $totalStars / $ratingCount : 0;
 
                 $this->em->persist($rating);
                 $this->em->flush();

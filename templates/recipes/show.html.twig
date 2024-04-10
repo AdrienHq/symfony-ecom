@@ -1,4 +1,5 @@
 {% extends "base.html.twig" %}
+{% import "macro/stars.html.twig" as star %}
 
 {% block body %}
     <div class="container">
@@ -49,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2" style="background-color: lightsteelblue; border-radius: 45px;">
+            <div class="col-2" style="background-color: #ECEFF1; border-radius: 45px;">
                 <div class="mt-5" style="margin-left: 1rem;">
                     <h3>Course type </h3>
                     {{ recipe.course.name }}
@@ -65,11 +66,11 @@
 {#                TODO I need to add some symbole to display it with stars and also not allow float result#}
                 <div class="mt-5" style="margin-left: 1rem;">
                     <h3>Overall rating</h3>
-                    {{ globalRating }}
+                    {{ star.renderStars(globalRating) }}
                 </div>
                 <div class="mt-5" style="margin-left: 1rem;">
                     <h3>Your rating</h3>
-                    {{ userRating }}
+                    {{ star.renderStars(userRating) }}
                 </div>
                 <div class="mt-5" style="margin-left: 1rem;">
                     {{ form_start(formRating) }}
