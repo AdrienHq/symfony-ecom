@@ -113,11 +113,15 @@ class Recipes
     #[ORM\OneToMany(targetEntity: Rating::class, mappedBy: 'recipe')]
     private Collection $ratings;
 
+    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $quantities;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->quantities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -386,6 +390,36 @@ class Recipes
             // set the owning side to null (unless already changed)
             if ($rating->getRecipe() === $this) {
                 $rating->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quantity>
+     */
+    public function getQuantities(): Collection
+    {
+        return $this->quantities;
+    }
+
+    public function addQuantity(Quantity $quantity): static
+    {
+        if (!$this->quantities->contains($quantity)) {
+            $this->quantities->add($quantity);
+            $quantity->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuantity(Quantity $quantity): static
+    {
+        if ($this->quantities->removeElement($quantity)) {
+            // set the owning side to null (unless already changed)
+            if ($quantity->getRecipe() === $this) {
+                $quantity->setRecipe(null);
             }
         }
 
