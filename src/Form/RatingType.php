@@ -13,7 +13,7 @@ class RatingType extends AbstractType
     {
         $builder
             ->add('stars', ChoiceType::class, [
-                'label' => 'Rating of the recipe',
+                'label' => 'Rate it ?',
                 'choices' => $this->generateChoices(),
             ])
             ->add('save', SubmitType::class, [
