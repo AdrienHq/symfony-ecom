@@ -4,11 +4,14 @@ namespace App\Form\recipe;
 
 use App\Entity\Category;
 use App\Entity\Course;
+use App\Entity\Quantity;
 use App\Entity\Recipes;
+use App\Form\QuantityType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -65,6 +68,15 @@ class RecipesType extends AbstractType
             ])
             ->add('slug', TextType::class, [
                 'required' => false
+            ])
+            ->add('quantities', CollectionType::class,[
+                'entry_type' => QuantityType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+                'entry_options' => ['label' => false],
+                'attr' =>[
+                    'data-controller' => 'form-collection'
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save'
