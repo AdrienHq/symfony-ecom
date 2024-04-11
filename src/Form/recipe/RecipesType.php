@@ -72,10 +72,13 @@ class RecipesType extends AbstractType
             ->add('quantities', CollectionType::class,[
                 'entry_type' => QuantityType::class,
                 'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
                 'entry_options' => ['label' => false],
                 'attr' =>[
-                    'data-controller' => 'form-collection'
+                    'data-controller' => 'form-collection',
+                    'data-form-collection-add-label-value' => 'Add ingredient',
+                    'data-form-collection-delete-label-value' => 'Delete ingredient'
                 ]
             ])
             ->add('save', SubmitType::class, [
