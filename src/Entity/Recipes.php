@@ -114,6 +114,7 @@ class Recipes
     private Collection $ratings;
 
     #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'recipe', orphanRemoval: true)]
+    #[Assert\Valid]
     private Collection $quantities;
 
     public function __construct()

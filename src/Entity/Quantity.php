@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\QuantityRepository;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: QuantityRepository::class)]
 class Quantity
@@ -14,6 +14,8 @@ class Quantity
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
+    #[Assert\Positive()]
     private ?float $quantity = null;
 
     #[ORM\Column(length: 255)]
