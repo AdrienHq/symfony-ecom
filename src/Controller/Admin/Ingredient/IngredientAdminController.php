@@ -28,9 +28,9 @@ class IngredientAdminController extends AbstractController
 
 
     #[Route('/', name: 'index')]
-    public function index(RecipesRepository $recipesRepository, Request $request): Response
+    public function index(Request $request): Response
     {
-        $ingredients = $this->ingredientRepository->findAll();
+        $ingredients = $this->ingredientRepository->findIngredientsForSpecificPage($request->query->getInt('page', 1));
 
         return $this->render("admin/ingredients/ingredients.html.twig", [
             'ingredients' => $ingredients,

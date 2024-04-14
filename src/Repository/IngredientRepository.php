@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Ingredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Ingredient>
@@ -16,9 +18,25 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class IngredientRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(
+        ManagerRegistry                     $registry,
+        private readonly PaginatorInterface $paginator
+    )
     {
         parent::__construct($registry, Ingredient::class);
+    }
+
+    public function findIngredientsForSpecificPage(int $page): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->createQueryBuilder('r')->select('r'),
+            $page,
+            10,
+            [
+                'distinct' => false,
+                'sortFieldAllowList' => ['r.id', 'r.name']
+            ]
+        );
     }
 
 //    /**
