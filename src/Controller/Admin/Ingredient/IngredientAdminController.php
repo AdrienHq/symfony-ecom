@@ -3,11 +3,9 @@
 namespace App\Controller\Admin\Ingredient;
 
 use App\Entity\Ingredient;
-use App\Entity\Recipes;
-use App\Form\QuantityType;
+use App\Form\IngredientType;
 use App\Form\recipe\RecipesType;
 use App\Repository\IngredientRepository;
-use App\Repository\RecipesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,42 +39,42 @@ class IngredientAdminController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $ingredient = new Ingredient();
-        $form = $this->createForm(QuantityType::class, $ingredient);
+        $form = $this->createForm(IngredientType::class, $ingredient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($ingredient);
             $em->flush();
-            $this->addFlash('success', 'New recipes created');
-            return $this->redirectToRoute('admin.recipes.index');
+            $this->addFlash('success', 'New ingredient created');
+            return $this->redirectToRoute('admin.ingredient.index');
         }
-        return $this->render('admin/recipes/create.html.twig', [
+        return $this->render('admin/ingredients/create.html.twig', [
             'form' => $form
         ]);
     }
 
     #[Route('[/{id}', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Recipes $ingredient, Request $request, EntityManagerInterface $em): RedirectResponse|Response
+    public function edit(Ingredient $ingredient, Request $request, EntityManagerInterface $em): RedirectResponse|Response
     {
-        $form = $this->createForm(RecipesType::class, $recipe);
+        $form = $this->createForm(IngredientType::class, $ingredient);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            $this->addFlash('success', 'The recipe has been edited');
-            return $this->redirectToRoute('admin.recipes.index');
+            $this->addFlash('success', 'The ingredient has been edited');
+            return $this->redirectToRoute('admin.ingredient.index');
         }
-        return $this->render('admin/recipes/edit.html.twig', [
-            'recipe' => $recipe,
+        return $this->render('admin/ingredients/edit.html.twig', [
+            'ingredient' => $ingredient,
             'form' => $form
         ]);
     }
 
     #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
-    public function delete(Recipes $recipe, EntityManagerInterface $em): RedirectResponse
+    public function delete(Ingredient $ingredient, EntityManagerInterface $em): RedirectResponse
     {
-        $em->remove($recipe);
+        $em->remove($ingredient);
         $em->flush();
-        $this->addFlash('success', 'Recipe deleted');
-        return $this->redirectToRoute('admin.recipes.index');
+        $this->addFlash('success', 'Ingredient deleted');
+        return $this->redirectToRoute('admin.ingredient.index');
     }
 
 }
