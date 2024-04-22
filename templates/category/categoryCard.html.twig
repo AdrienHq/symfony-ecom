@@ -22,10 +22,12 @@
                 <em class="text-muted text-primary fst-italic">#{{ category }}</em>
             {% endfor %}
         </div>
-        <div class="card-footer">
-            <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="btn btn-primary mt-8">
-                Lire la suite
-            </a>
+        <div class="border-top text-end" style="background: none;">
+            <div class="mt-3">
+                <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="btn btn-primary">
+                    Lire la suite
+                </a>
+            </div>
         </div>
 
     </div>
