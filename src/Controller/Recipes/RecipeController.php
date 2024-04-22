@@ -61,7 +61,11 @@ class RecipeController extends AbstractController
 
         $formRating = $this->createForm(RatingType::class);
         $formRating->handleRequest($request);
-        $recipeRating = $this->ratingRepository->findByUserAndRecipe($this->getUser()->getId(), $recipe->getId());
+        if($this->getUser() !== null){
+            $recipeRating = $this->ratingRepository->findByUserAndRecipe($this->getUser()->getId(), $recipe->getId());
+        } else {
+            $recipeRating = null;
+        }
 
         if ($formRating->isSubmitted() && $formRating->isValid()) {
             /** @var Rating $recipeRating */
