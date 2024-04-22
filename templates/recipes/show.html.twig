@@ -42,8 +42,17 @@
                             </button>
                             {{ form_end(form) }}
                         </div>
+                    {% else %}
+                        <div class="text-center" style="margin-top: 55px; color: gray">
+                            <h4>Sign-in or connect to be able to leave a comment ! :)</h4>
+                        </div>
                     {% endif %}
-                    <div>
+                    <div class="mt-5">
+                        {% if recipe.comments|length == 0 %}
+                            <div class="text-center" style="margin-top: 85px; color: gray">
+                                <h4>No comments for the moment :(</h4>
+                            </div>
+                        {% endif %}
                         {% for commentIndex, comment in recipe.comments %}
                             {% include 'components/comment.html.twig' with {comment: comment, commentIndex: commentIndex} only %}
                         {% endfor %}
