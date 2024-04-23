@@ -67,14 +67,14 @@ class RecipeController extends AbstractController
             $recipeRating = null;
         }
 
-        if ($formRating->isSubmitted() && $formRating->isValid()) {
+        if ($this->getUser() !== null && $formRating->isSubmitted() && $formRating->isValid()) {
             /** @var Rating $recipeRating */
             if ($recipeRating && $recipeRating->getUser() === $this->getUser() && $recipeRating->getRecipe() === $recipe) {
                 $recipeRating->setStars($formRating->getData()['stars']);
                 $averageRating = $ratingCount > 0 ? $totalStars / $ratingCount : 0;
                 $this->em->flush();
                 $this->addFlash('success', 'Your rating was updated !');
-                $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
+                return $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
             } else {
                 $rating = (new Rating())
                     ->setUser($this->getUser())
@@ -87,8 +87,11 @@ class RecipeController extends AbstractController
                 $this->em->flush();
 
                 $this->addFlash('success', 'Your rating was saved !');
-                $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
+                return $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
             }
+        } elseif ($this->getUser() === null && $formRating->isSubmitted() && $formRating->isValid()) {
+            $this->addFlash('warning', 'You need to be logged in to rate recipes.');
+            return $this->redirectToRoute('recipe.detail', ['slug' => $slug, 'id' => $id]);
         }
 
         return $this->render("recipes/show.html.twig", [
