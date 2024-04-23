@@ -94,11 +94,12 @@
                         </div>
                         {{ form_end(formRating) }}
                     </div>
-                    {% else %}
-                        <div class="mt-5" style="margin-left: 1rem;">
-                            <h3>Your rating</h3>
-                            <p style="font-style: italic; color: gray">You need to be connected to be able to rate a recipe !</p>
-                        </div>
+                {% else %}
+                    <div class="mt-5" style="margin-left: 1rem;">
+                        <h3>Your rating</h3>
+                        <p style="font-style: italic; color: gray">You need to be connected to be able to rate a recipe
+                            !</p>
+                    </div>
                 {% endif %}
                 <div class="mt-5" style="margin-left: 1rem;">
                     <h3>Ingredients</h3>
