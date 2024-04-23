@@ -76,23 +76,30 @@
                     <h3>Overall rating</h3>
                     {{ star.renderStars(globalRating) }}
                 </div>
-                <div class="mt-5" style="margin-left: 1rem;">
-                    <h3>Your rating</h3>
-                    {{ star.renderStars(userRating) }}
-                </div>
-                <div class="mt-5" style="margin-left: 1rem;">
-                    {{ form_start(formRating) }}
-                    <div class="row">
-                        <h3>{{ form_label(formRating.stars) }}</h3>
-                        <div class="col-6">
-                            {{ form_widget(formRating.stars) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(formRating.save) }}
-                        </div>
+                {% if app.user %}
+                    <div class="mt-5" style="margin-left: 1rem;">
+                        <h3>Your rating</h3>
+                        {{ star.renderStars(userRating) }}
                     </div>
-                    {{ form_end(formRating) }}
-                </div>
+                    <div class="mt-5" style="margin-left: 1rem;">
+                        {{ form_start(formRating) }}
+                        <div class="row">
+                            <h3>{{ form_label(formRating.stars) }}</h3>
+                            <div class="col-6">
+                                {{ form_widget(formRating.stars) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_widget(formRating.save) }}
+                            </div>
+                        </div>
+                        {{ form_end(formRating) }}
+                    </div>
+                    {% else %}
+                        <div class="mt-5" style="margin-left: 1rem;">
+                            <h3>Your rating</h3>
+                            <p style="font-style: italic; color: gray">You need to be connected to be able to rate a recipe !</p>
+                        </div>
+                {% endif %}
                 <div class="mt-5" style="margin-left: 1rem;">
                     <h3>Ingredients</h3>
                     </br>
