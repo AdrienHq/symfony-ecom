@@ -194,10 +194,10 @@ class RecipesRepository extends ServiceEntityRepository
                 ->andWhere('p.vegetarian = 1');
         }
 
-        if (!empty($search->course)) {
+        if (!empty($search->category)) {
             $query = $query
-                ->andWhere('e.id IN (:course)')
-                ->setParameter('course', $search->course);
+                ->andWhere('c.id IN (:category)')
+                ->setParameter('category', $search->category);
         }
 
         $query = $query->getQuery();
