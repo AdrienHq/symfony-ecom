@@ -11,39 +11,25 @@
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
         {% for recipe in recipes %}
-            {% if loop.first %}
-                <div class="carousel-item active">
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <div class="image-container">
                     {% if recipe.thumbnail is not empty %}
-                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail carousel-image" alt="">
                     {% else %}
-                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#{{ recipe.id }}" class="img-thumbnail carousel-image">
                     {% endif %}
-                    <div class="carousel-caption">
-                        <h3>{{ recipe.name }}</h3>
-                        <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
-                           style="text-decoration: none; color: lightslategrey;">
-                            Lire la suite
-                        </a>
-                    </div>
                 </div>
-            {% else %}
-                <div class="carousel-item">
-                    {% if recipe.thumbnail is not empty %}
-                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="">
-                    {% else %}
-                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
-                    {% endif %}
-                    <div class="carousel-caption">
-                        <h3>{{ recipe.name }}</h3>
-                        <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
-                           style="text-decoration: none; color: lightslategrey;">
-                            Lire la suite
-                        </a>
-                    </div>
+                <div class="carousel-caption">
+                    <h3>{{ recipe.name }}</h3>
+                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
+                       style="text-decoration: none; color: whitesmoke;">
+                        Lire la suite
+                    </a>
                 </div>
-            {% endif %}
+            </div>
         {% endfor %}
     </div>
+
 
     <!-- Left and right controls/icons -->
     <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
