@@ -1,0 +1,43 @@
+.blog-sidebar {
+    background-color: #f5f5f5;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.recipe-card {
+    background-color: lightcyan;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem; /* Adjust spacing between cards */
+    padding: 15px; /* Add some padding inside the cards */
+    border: 2px solid black;
+}
+
+.recipe-card .img-fluid {
+    max-height: 150px; /* Increase the max height for the images */
+    object-fit: cover;
+    object-position: center;
+}
+
+.recipe-card h5 {
+    font-size: 1.25rem;
+}
+
+.views-text {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-card .badge {
+    font-size: 0.75rem;
+    background-color: darkred; /* Match badge color to border */
+    color: white; /* Ensure the text is readable */
+}
+
+.recipe-image {
+    width: 100%;
+    height: auto;
+    max-height: 450px; /* Adjust this value as necessary */
+    object-fit: cover;
+    border-radius: 10px;
+}
