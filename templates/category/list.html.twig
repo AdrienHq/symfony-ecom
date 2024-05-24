@@ -8,12 +8,9 @@
                 {% include '/category/_filter.html.twig' with {form: form } only %}
             </div>
             <div class="col-md-9">
-{#                <div class="d-flex justify-content-end mb-2">#}
-{#                    {{ knp_pagination_sortable(recipes, 'Duration', 'p.duration') }}#}
-{#                </div>#}
                 <div class="grid">
                     {% for recipe in recipes %}
-                        {% include '/category/categoryCard.html.twig' with {recipe: recipe } only %}
+                        {% include '/recipes/recipeCard.html.twig' with {recipe: recipe } only %}
                     {% endfor %}
                 </div>
                 <div class="pagination">
