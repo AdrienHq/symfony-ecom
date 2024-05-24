@@ -24,9 +24,6 @@
                     {{ recipe.description|raw }}
                 </div>
                 <div class="mt-5">
-                    {{ recipe.recipeSteps|raw }}
-                </div>
-                <div class="mt-5">
                     <h3 style="text-decoration: underline overline blue;">All the comments for the
                         recipe {{ recipe.name|default('') }}</h3>
                     {% if app.user %}
