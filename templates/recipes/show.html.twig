@@ -21,10 +21,10 @@
                     {% endif %}
                 </div>
                 <div class="mt-5" style="font-style: italic">
-                    {{ recipe.description }}
+                    {{ recipe.description|raw }}
                 </div>
                 <div class="mt-5">
-                    {{ recipe.recipeSteps }}
+                    {{ recipe.recipeSteps|raw }}
                 </div>
                 <div class="mt-5">
                     <h3 style="text-decoration: underline overline blue;">All the comments for the

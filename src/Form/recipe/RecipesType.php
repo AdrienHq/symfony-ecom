@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -33,19 +34,11 @@ class RecipesType extends AbstractType
             ->add('thumbnailFile', FileType::class, [
                 'required' => false,
             ])
-            ->add('content', TextareaType::class, [
-                'required' => false,
-                'empty_data' => ''
-            ])
             ->add('description', TextareaType::class, [
                 'required' => false,
                 'empty_data' => ''
             ])
             ->add('questions', TextareaType::class, [
-                'required' => false,
-                'empty_data' => ''
-            ])
-            ->add('recipeSteps', TextareaType::class, [
                 'required' => false,
                 'empty_data' => ''
             ])
@@ -80,6 +73,11 @@ class RecipesType extends AbstractType
                     'data-form-collection-add-label-value' => 'Add ingredient',
                     'data-form-collection-delete-label-value' => 'Delete ingredient'
                 ]
+            ])
+            ->add('vegetarian', CheckboxType::class, [
+                'label' => 'Vegetarian',
+                'required' => false,
+                'empty_data' => null
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save'

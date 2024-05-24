@@ -1,15 +1,13 @@
 {% extends "/admin/admin.html.twig" %}
 
-{% block title "Create a recipe !" %}
+{% block title "Create a recipe!" %}
 
 {% block body %}
     <h1>Create a new recipe</h1>
-    {#    {{ form_start(form) }} #}
-    {#    {{ form_end(form) }} #}
-
 
     <div class="form-inline">
         {{ form_start(form) }}
+
         <div class="form-group">
             {{ form_row(form.name) }}
         </div>
@@ -17,16 +15,14 @@
             {{ form_row(form.thumbnailFile) }}
         </div>
         <div class="form-group">
-            {{ form_row(form.content) }}
+            {{ form_label(form.description) }}
+            <div id="quill-description" class="quill-editor"></div>
+            {{ form_widget(form.description, { 'attr': {'style': 'display:none'} }) }}
         </div>
         <div class="form-group">
-            {{ form_row(form.description) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(form.questions) }}
-        </div>
-        <div class="form-group">
-            {{ form_row(form.recipeSteps) }}
+            {{ form_label(form.questions) }}
+            <div id="quill-questions" class="quill-editor"></div>
+            {{ form_widget(form.questions, { 'attr': {'style': 'display:none'} }) }}
         </div>
         <div class="form-group">
             {{ form_row(form.duration) }}
@@ -40,7 +36,6 @@
         <div class="form-group">
             {{ form_row(form.slug) }}
         </div>
-
         <div class="form-group">
             <div class="form-field">
                 {{ form_label(form.quantities) }}
@@ -48,12 +43,12 @@
                 {{ form_errors(form.quantities) }}
             </div>
         </div>
-
+        <div class="form-group">
+            {{ form_row(form.vegetarian) }}
+        </div>
         <div class="form-group">
             {{ form_row(form.save) }}
         </div>
         {{ form_end(form) }}
     </div>
-
-
 {% endblock %}
