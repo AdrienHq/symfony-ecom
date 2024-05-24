@@ -58,19 +58,12 @@ class Recipes
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
-    private string $content = '';
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Sanitizer()]
     private string $description = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Sanitizer()]
     private string $questions = '';
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Sanitizer()]
-    private string $recipeSteps = '';
 
     #[ORM\Column]
     #[Groups([Recipes::ITEM])]
@@ -113,7 +106,7 @@ class Recipes
     #[ORM\OneToMany(targetEntity: Rating::class, mappedBy: 'recipe')]
     private Collection $ratings;
 
-    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'recipe', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'recipe', cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[Assert\Valid]
     private Collection $quantities;
 
@@ -146,18 +139,6 @@ class Recipes
         return $this;
     }
 
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): static
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
     public function getDescription(): string
     {
         return $this->description;
@@ -166,18 +147,6 @@ class Recipes
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getRecipeSteps(): string
-    {
-        return $this->recipeSteps;
-    }
-
-    public function setRecipeSteps(string $recipeSteps): static
-    {
-        $this->recipeSteps = $recipeSteps;
 
         return $this;
     }
@@ -322,7 +291,7 @@ class Recipes
         return $this->vegetarian;
     }
 
-    public function setVegetarian(bool $vegetarian): static
+    public function setVegetarian(?bool $vegetarian): self
     {
         $this->vegetarian = $vegetarian;
 
