@@ -1,33 +1,29 @@
-<div class="card">
+<div class="card h-100 d-flex flex-column">
     {% if recipe.thumbnail is not empty %}
-        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="card-img-top" alt="">
+        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="card-img-top" alt="Recipe thumbnail">
     {% else %}
-        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="card-img-top">
+        <img src="{{ asset('defaultImage.jpg') }}" alt="Default image for recipe {{ recipe.id }}" class="card-img-top">
     {% endif %}
-    <div class="card-body">
+    <div class="card-body d-flex flex-column">
         <h2 class="card-title">{{ recipe.name|default("") }}</h2>
-        <div class="card-title">
-            <h4 class="card-title" style="font-size: 1.5rem; color: firebrick">
-                {% if (recipe.duration // 60) > 0 %}
-                    {{ (recipe.duration // 60) ~ ' hour ' }}
-                {% endif %}
-                {{ (recipe.duration % 60) ~ ' minutes' }}
-            </h4>
+        <div class="card-duration" style="font-size: 1.5rem; color: firebrick;">
+            {% if (recipe.duration // 60) > 0 %}
+                {{ (recipe.duration // 60) ~ ' hour ' }}
+            {% endif %}
+            {{ (recipe.duration % 60) ~ ' minutes' }}
         </div>
-        <p class="card-text" class="mt-3">
-            {{ recipe.description|default("")|slice(0, 120) }}{% if recipe.description|length > 120 %} ...{% endif %}
+        <p class="card-text mt-3">
+            {{ recipe.description|default("")|slice(0, 120) }}{% if recipe.description|length > 120 %}...{% endif %}
         </p>
-        <div>
+        <div class="card-categories mb-3">
             {% for category in recipe.category %}
-                <em class="text-muted text-primary fst-italic">#{{ category }}</em>
+                <em style="color: lightseagreen;">#{{ category.name }}</em>
             {% endfor %}
         </div>
-        <div class="border-top text-end" style="background: none;">
-            <div class="mt-3">
-                <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="btn btn-primary">
-                    Lire la suite
-                </a>
-            </div>
+        <div class="mt-auto border-top text-end pt-3" style="background: none;">
+            <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="btn btn-primary">
+                Lire la suite
+            </a>
         </div>
     </div>
 </div>
