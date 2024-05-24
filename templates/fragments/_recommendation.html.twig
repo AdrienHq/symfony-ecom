@@ -1,22 +1,50 @@
 {% for recipe in recommendedRecipes %}
-    {#    {{ recipe.name | default('') }} #}
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            {% if recipe.thumbnail is not empty %}
-                <div class="image-container">
-                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">
-                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail" alt="{{ recipe.name }}">
-                        <div class="overlay">{{ recipe.name }}</div>
-                    </a>
+    <div class="col-md-3 mb-4">
+        <div class="card h-100">
+            <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="text-decoration-none">
+                <div class="image-container position-relative">
+                    {% if recipe.thumbnail is not empty %}
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="card-img-top" alt="{{ recipe.name }}">
+                    {% else %}
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="Default image" class="card-img-top">
+                    {% endif %}
+                    <div class="overlay position-absolute w-100 h-100 d-flex align-items-center justify-content-center text-white">
+                        <h5 class="text-center bg-dark bg-opacity-50 p-2 rounded">{{ recipe.name }}</h5>
+                    </div>
                 </div>
-            {% else %}
-                <div class="image-container">
-                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}">
-                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#" .{{ recipe.id }} class="img-thumbnail">
-                        <div class="overlay">{{ recipe.name }}</div>
-                    </a>
-                </div>
-            {% endif %}
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ recipe.name }}</h5>
+            </div>
         </div>
     </div>
 {% endfor %}
+
+<style>
+    .image-container {
+        overflow: hidden;
+        position: relative;
+        height: 200px; /* Adjust height as needed */
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .image-container:hover img {
+        transform: scale(1.1);
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .image-container:hover .overlay {
+        opacity: 1;
+    }
+</style>
