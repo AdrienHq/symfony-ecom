@@ -12,23 +12,23 @@
     <div class="carousel-inner">
         {% for recipe in recipes %}
             <div class="carousel-item {% if loop.first %}active{% endif %}">
-                <div class="image-container">
+                <div class="image-container rounded-image-container">
                     {% if recipe.thumbnail is not empty %}
-                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail carousel-image" alt="">
+                        <img src="{{ vich_uploader_asset(recipe, 'thumbnailFile') }}" class="img-thumbnail carousel-image rounded-image" alt="Recipe thumbnail">
                     {% else %}
-                        <img src="{{ asset('defaultImage.jpg') }}" alt="image#{{ recipe.id }}" class="img-thumbnail carousel-image">
+                        <img src="{{ asset('defaultImage.jpg') }}" alt="Default image for recipe {{ recipe.id }}" class="img-thumbnail carousel-image rounded-image">
                     {% endif %}
                 </div>
                 <div class="carousel-caption">
                     <h3>{{ recipe.name }}</h3>
-                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8"
-                       style="text-decoration: none; color: whitesmoke;">
+                    <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8" style="text-decoration: none; color: whitesmoke;">
                         Lire la suite
                     </a>
                 </div>
             </div>
         {% endfor %}
     </div>
+
 
 
     <!-- Left and right controls/icons -->
