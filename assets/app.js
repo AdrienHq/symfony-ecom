@@ -18,3 +18,32 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 // import './react/controllers/Recipes.jsx'
 // import './react/controllers/Navigation.jsx'
 import './react/controllers/Comment.jsx'
+
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const editors = document.querySelectorAll('.quill-editor');
+
+    const quillInstances = Array.from(editors).map(editor => {
+        const quill = new Quill(editor, {
+            theme: 'snow'
+        });
+
+        const textarea = editor.nextElementSibling;
+        quill.on('text-change', function () {
+            textarea.value = quill.root.innerHTML;
+        });
+
+        return quill;
+    });
+
+    document.querySelector('form').onsubmit = function () {
+        quillInstances.forEach(quill => {
+            const editor = quill.container;
+            const textarea = editor.nextElementSibling;
+            textarea.value = quill.root.innerHTML;
+        });
+    };
+});
+
