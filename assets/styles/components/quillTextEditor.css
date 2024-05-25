@@ -1,0 +1,17 @@
+#editor-container {
+    height: 400px;
+}
+
+.ql-toolbar {
+    border: none;
+}
+
+.ql-container {
+    border: none;
+    font-family: 'Georgia', serif;
+}
+
+.ql-editor {
+    padding: 20px;
+    min-height: 300px;
+}
