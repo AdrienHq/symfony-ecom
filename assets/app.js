@@ -25,9 +25,65 @@ import 'quill/dist/quill.snow.css';
 document.addEventListener('DOMContentLoaded', () => {
     const editors = document.querySelectorAll('.quill-editor');
 
+    function imageHandler() {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = () => {
+            const file = input.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // Use the correct upload URL
+                const uploadUrl = '/admin/recipes/upload-image';
+
+                fetch(uploadUrl, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result && result.imageUrl) {
+                            const range = this.quill.getSelection();
+                            this.quill.insertEmbed(range.index, 'image', result.imageUrl);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error uploading image:', error);
+                    });
+            }
+        };
+    }
+
     const quillInstances = Array.from(editors).map(editor => {
         const quill = new Quill(editor, {
-            theme: 'snow'
+            theme: 'snow',
+            modules: {
+                toolbar: {
+                    container: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'script': 'sub'}, { 'script': 'super' }],
+                        [{ 'indent': '-1'}, { 'indent': '+1' }],
+                        [{ 'direction': 'rtl' }],
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'font': [] }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean']
+                    ],
+                    handlers: {
+                        'image': imageHandler
+                    }
+                }
+            }
         });
 
         const textarea = editor.nextElementSibling;
@@ -46,4 +102,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 });
+
 
