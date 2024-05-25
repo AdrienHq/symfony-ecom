@@ -30,3 +30,9 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /public/images/
+
+# Ignore all files in the uploads directory
+/public/uploads/*
+
+# Except this file which will keep the directory in Git
+!/public/uploads/.gitignore
