@@ -91,6 +91,7 @@ class Recipes
 
     #TODO Manage the size of the file
     #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
+    #[Assert\Image]
     private ?File $thumbnailFile = null;
 
     #[ORM\Column]
