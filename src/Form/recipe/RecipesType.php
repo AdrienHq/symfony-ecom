@@ -4,7 +4,6 @@ namespace App\Form\recipe;
 
 use App\Entity\Category;
 use App\Entity\Course;
-use App\Entity\Quantity;
 use App\Entity\Recipes;
 use App\Form\QuantityType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
