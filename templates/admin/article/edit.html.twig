@@ -1,0 +1,9 @@
+{% extends "/admin/admin.html.twig" %}
+
+{% block title "Edit article : " ~ article.title %}
+
+{% block body %}
+    <h1>{{ category.title |capitalize }}</h1>
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+{% endblock %}
