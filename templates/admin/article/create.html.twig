@@ -4,6 +4,28 @@
 
 {% block body %}
     <h1>Create a new article</h1>
-    {{ form_start(form) }}
-    {{ form_end(form) }}
+
+    <div class="form-inline">
+        {{ form_start(form) }}
+
+        <div class="form-group">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.articleThumbnail) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.content) }}
+            <div id="quill-description" class="quill-editor"></div>
+            {{ form_widget(form.content, { 'attr': {'style': 'display:none'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.slug) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.save) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
+
