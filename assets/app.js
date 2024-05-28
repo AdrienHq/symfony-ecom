@@ -103,4 +103,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    var dropdownSubmenus = document.querySelectorAll('.dropdown-submenu');
+
+    dropdownSubmenus.forEach(function (submenu) {
+        submenu.addEventListener('mouseover', function () {
+            var submenuDropdown = submenu.querySelector('.dropdown-menu');
+            if (submenuDropdown) {
+                submenuDropdown.classList.add('show');
+            }
+        });
+
+        submenu.addEventListener('mouseout', function () {
+            var submenuDropdown = submenu.querySelector('.dropdown-menu');
+            if (submenuDropdown) {
+                submenuDropdown.classList.remove('show');
+            }
+        });
+    });
+});
+
 
