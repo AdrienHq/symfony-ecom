@@ -17,22 +17,32 @@
                 <li class="nav-item {{ app.request.attributes.get('_route') == 'article.index' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ path('article.index') }}">Article</a>
                 </li>
-                <li class="nav-item {{ app.request.attributes.get('_route') == 'recipes.list' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('recipes.list') }}">Recettes</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégories</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
-                        {{ render(controller('App\\Controller\\HomeController::renderCategoriesFragmentNavbar')) }}
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCourses" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Type de repas</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCourses">
-                        {{ render(controller('App\\Controller\\HomeController::renderCoursesFragmentNavbar')) }}
-                    </div>
+                <li class="nav-item dropdown {{ app.request.attributes.get('_route') in ['recipes.list', 'categories.list', 'courses.list'] ? 'active' : '' }}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRecettes" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recettes</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownRecettes">
+                        <li>
+                            <a class="dropdown-item {{ app.request.attributes.get('_route') == 'recipes.list' ? 'active' : '' }}"
+                               href="{{ path('recipes.list') }}">All Recettes</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Catégories</a>
+                            <ul class="dropdown-menu">
+                                {{ render(controller('App\\Controller\\HomeController::renderCategoriesFragmentNavbar')) }}
+                            </ul>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Type de repas</a>
+                            <ul class="dropdown-menu">
+                                {{ render(controller('App\\Controller\\HomeController::renderCoursesFragmentNavbar')) }}
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

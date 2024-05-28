@@ -1,3 +1,5 @@
 {% for course in courses %}
-    <a class="dropdown-item" href="{{ path('course.index', {id: course.id} ) }}">{{ course.name }}</a>
-{%  endfor %}
+    <li>
+        <a class="dropdown-item" href="{{ path('course.index', {id: course.id} ) }}">{{ course.name }}</a>
+    </li>
+{% endfor %}
