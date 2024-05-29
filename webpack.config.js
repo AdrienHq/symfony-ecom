@@ -21,7 +21,7 @@ Encore
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
     // Define the entry for your custom JavaScript file
-    // .addEntry('bootstrap', './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+    .addEntry('bootstrap', './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
     .addEntry('app', './assets/app.js')
     // Add app.scss as a style entry
     // .addStyleEntry('app', './assets/styles/app.scss')
