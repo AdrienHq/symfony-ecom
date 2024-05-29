@@ -1,6 +1,8 @@
 import './styles/app.scss';
 import './bootstrap.js';
 
+require('bootstrap');
+
 import {registerReactControllerComponents} from '@symfony/ux-react';
 
 // import $ from 'jquery';
