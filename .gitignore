@@ -36,3 +36,7 @@ yarn-error.log
 
 # Except this file which will keep the directory in Git
 !/public/uploads/.gitignore
+
+# Ignore specific files in prod-images if needed
+ /public/prod-images/*.tmp
+ /public/prod-images/*.bak
