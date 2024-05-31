@@ -24,8 +24,8 @@ class MailerTestController extends AbstractController
     public function sendTestEmail(): Response
     {
         $email = (new Email())
-            ->from('contact@niftynoms.com')
-            ->to('adrienhecq@example.com')
+            ->from('niftynoms@niftynoms.com')
+            ->to('adrienhecq@gmail.com')
             ->subject('Test Email')
             ->text('This is a test email.');
 
