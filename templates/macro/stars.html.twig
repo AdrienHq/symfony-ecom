@@ -5,17 +5,17 @@
 
     {% if fullStars > 0 %}
         {% for i in 1..fullStars %}
-            <img src="{{ asset('images/fullStar.png') }}" style="width: 20px; height: 20px;" alt="...">
+            <img src="{{ asset('prod-images/fullStar.png') }}" style="width: 20px; height: 20px;" alt="...">
         {% endfor %}
     {% endif %}
 
     {% if halfStar == 1 %}
-        <img src="{{ asset('images/halfStar.png') }}" style="width: 20px; height: 20px;" alt="...">
+        <img src="{{ asset('prod-images/halfStar.png') }}" style="width: 20px; height: 20px;" alt="...">
     {% endif %}
 
     {% if emptyStars > 0 %}
         {% for i in 1..emptyStars %}
-            <img src="{{ asset('images/emptyStar.png') }}" style="width: 20px; height: 20px;" alt="...">
+            <img src="{{ asset('prod-images/emptyStar.png') }}" style="width: 20px; height: 20px;" alt="...">
         {% endfor %}
     {% endif %}
 {% endmacro %}
