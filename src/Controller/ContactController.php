@@ -18,12 +18,6 @@ class ContactController extends AbstractController
     {
         $data = new ContactDTO();
 
-//         TODO FOR TEST PURPOSE SUPPRESS LATER
-        $data->name = 'yourName';
-        $data->email = 'yourEmail@mailcom';
-        $data->message = 'Your super message';
-
-
         $form = $this->createForm(ContactType::class, $data);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
