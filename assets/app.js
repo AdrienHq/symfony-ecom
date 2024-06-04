@@ -124,4 +124,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.getElementById('search-input').addEventListener('input', function() {
+    var query = this.value;
+
+    fetch('/search?q=' + query)
+        .then(response => response.json())
+        .then(data => {
+            var resultsList = document.getElementById('search-results');
+            resultsList.innerHTML = ''; // Clear previous results
+
+            data.forEach(item => {
+                var listItem = document.createElement('li');
+                listItem.textContent = item.name; // Adjust based on your data structure
+                resultsList.appendChild(listItem);
+            });
+        });
+});
+
 
