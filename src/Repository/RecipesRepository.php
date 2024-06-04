@@ -233,5 +233,13 @@ class RecipesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findBySearchQuery(string $query)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.name LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
 
 }
