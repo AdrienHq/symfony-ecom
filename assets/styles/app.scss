@@ -2,6 +2,12 @@
 @import './_variables.scss';
 @import './_navigation.scss';
 
+//@import "recipes";
+//@import "category";
+//@import "components";
+//@import "search";
+
+
 @import "recipes/list.css";
 @import "category/table.css";
 @import "./base-body.css";
@@ -12,6 +18,7 @@
 @import "components/sidebar.css";
 @import "components/carousel.css";
 @import "components/quillTextEditor.css";
+@import "search/search.css";
 
 
 body {
