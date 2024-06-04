@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Recipes;
 
 use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
