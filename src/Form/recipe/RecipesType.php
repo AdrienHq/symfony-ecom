@@ -28,30 +28,43 @@ class RecipesType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Name'
+                'label' => 'recipeForm.name',
+                'translation_domain' => 'recipeForm'
             ])
             ->add('thumbnailFile', FileType::class, [
+                'label' => 'recipeForm.thumbnailFile',
+                'translation_domain' => 'recipeForm',
                 'required' => false,
             ])
             ->add('description', TextareaType::class, [
+                'label' => 'recipeForm.description',
+                'translation_domain' => 'recipeForm',
                 'required' => false,
                 'empty_data' => ''
             ])
             ->add('questions', TextareaType::class, [
+                'label' => 'recipeForm.questions',
+                'translation_domain' => 'recipeForm',
                 'required' => false,
                 'empty_data' => ''
             ])
             ->add('duration', IntegerType::class, [
-                'label' => 'Duration of the recipe (in minutes)',
+//                'label' => 'Duration of the recipe (in minutes)',
+                'label' => 'recipeForm.duration',
+                'translation_domain' => 'recipeForm',
                 'empty_data' => '0'
             ])
             ->add('category', EntityType::class, [
+                'label' => 'recipeForm.category',
+                'translation_domain' => 'recipeForm',
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'by_reference' => false
             ])
             ->add('course', EntityType::class, [
+                'label' => 'recipeForm.course',
+                'translation_domain' => 'recipeForm',
                 'class' => Course::class,
                 'choice_label' => 'name',
                 'multiple' => false,
@@ -59,9 +72,13 @@ class RecipesType extends AbstractType
 //                'by_reference' => false
             ])
             ->add('slug', TextType::class, [
+                'label' => 'recipeForm.slug',
+                'translation_domain' => 'recipeForm',
                 'required' => false
             ])
             ->add('quantities', CollectionType::class,[
+                'label' => 'recipeForm.quantities',
+                'translation_domain' => 'recipeForm',
                 'entry_type' => QuantityType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -74,12 +91,14 @@ class RecipesType extends AbstractType
                 ]
             ])
             ->add('vegetarian', CheckboxType::class, [
-                'label' => 'Vegetarian',
+                'label' => 'recipeForm.vegetarian',
+                'translation_domain' => 'recipeForm',
                 'required' => false,
                 'empty_data' => null
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Save'
+                'label' => 'recipeForm.save',
+                'translation_domain' => 'recipeForm',
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->slugCompletion(...))
             ->addEventListener(FormEvents::POST_SUBMIT, $this->timeStampGenerator(...));
