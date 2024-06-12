@@ -18,12 +18,18 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                'label' => 'categoryForm.name',
+                'translation_domain' => 'categoryForm'
+            ])
             ->add('slug', TextType::class, [
+                'label' => 'categoryForm.slug',
+                'translation_domain' => 'categoryForm',
                 'required' => false
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Save'
+                'label' => 'categoryForm.save',
+                'translation_domain' => 'categoryForm',
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->slugCompletion(...))
             ->addEventListener(FormEvents::POST_SUBMIT, $this->timeStampGenerator(...));

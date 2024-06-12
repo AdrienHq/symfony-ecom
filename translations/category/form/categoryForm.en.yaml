@@ -1,0 +1,4 @@
+categoryForm:
+  name: 'Category Name'
+  slug: 'Slug'
+  save: 'Save this category'
