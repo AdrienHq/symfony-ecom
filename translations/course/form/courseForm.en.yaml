@@ -1,0 +1,4 @@
+courseForm:
+  name: 'Course name'
+  slug: 'Slug'
+  save: 'Save this course'
