@@ -52,13 +52,13 @@
                     </div>
 
                     <div class="mb-4">
-                        <h3>{{ 'show.rating'|trans({}, 'fillerWords') }}</h3>
+                        <h3>{{ 'rate.rating'|trans({}, 'fillerWords') }}</h3>
                         {{ star.renderStars(globalRating) }}
                     </div>
 
                     {% if app.user %}
                         <div class="mb-4">
-                            <h3>{{ 'show.yourRating'|trans({}, 'fillerWords') }}</h3>
+                            <h3>{{ 'rate.yourRating'|trans({}, 'fillerWords') }}</h3>
                             {{ star.renderStars(userRating) }}
                         </div>
                         <div class="mb-4">
@@ -76,7 +76,7 @@
                         </div>
                     {% else %}
                         <div class="mb-4">
-                            <h3>{{ 'show.yourRating'|trans({}, 'fillerWords') }}</h3>
+                            <h3>{{ 'rate.yourRating'|trans({}, 'fillerWords') }}</h3>
                             <p class="fst-italic text-gray">
                                 {{ 'comment.connectionNeeded'|trans({}, 'fillerWords') }}
                             </p>
