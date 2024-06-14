@@ -2,6 +2,7 @@
 
 namespace App\Form\recipe;
 
+use AllowDynamicProperties;
 use App\Data\recipe\SearchData;
 use App\Entity\Category;
 use App\Entity\Course;
@@ -12,9 +13,16 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
+#[AllowDynamicProperties]
 class SearchForm extends AbstractType
 {
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -23,7 +31,7 @@ class SearchForm extends AbstractType
                 'required' => false,
                 'empty_data' => '',
                 'attr' => [
-                    'placeholder' => "Search"
+                    'placeholder' => $this->translator->trans('form.search', [], 'searchRecipeForm')
                 ]
             ])
             ->add('category', EntityType::class, [
@@ -44,21 +52,21 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => "Minimum"
+                    'placeholder' => $this->translator->trans('form.min_duration_placeholder', [], 'searchRecipeForm')
                 ]
             ])
             ->add('maxDuration', NumberType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => "Maximum"
+                    'placeholder' => $this->translator->trans('form.max_duration_placeholder', [], 'searchRecipeForm')
                 ]
             ])
             ->add('vegetarian', CheckboxType::class, [
-                'label' => 'Vegetarian ?',
+                'label' => 'form.vegetarian',
+                'translation_domain' => 'searchRecipeForm',
                 'required' => false
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
