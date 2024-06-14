@@ -3,8 +3,6 @@
 namespace App\Form\category;
 
 use App\Data\category\SearchDataCategory;
-use App\Data\recipe\SearchData;
-use App\Entity\Category;
 use App\Entity\Course;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,9 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SearchFormCategory extends AbstractType
 {
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -24,7 +28,7 @@ class SearchFormCategory extends AbstractType
                 'required' => false,
                 'empty_data' => '',
                 'attr' => [
-                    'placeholder' => "Search"
+                    'placeholder' => $this->translator->trans('form.search', [], 'searchCategoryForm')
                 ]
             ])
             ->add('course', EntityType::class, [
@@ -38,21 +42,21 @@ class SearchFormCategory extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => "Minimum"
+                    'placeholder' => $this->translator->trans('form.min_duration_placeholder', [], 'searchCategoryForm')
                 ]
             ])
             ->add('maxDuration', NumberType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => "Maximum"
+                    'placeholder' => $this->translator->trans('form.max_duration_placeholder', [], 'searchCategoryForm')
                 ]
             ])
             ->add('vegetarian', CheckboxType::class, [
-                'label' => 'Vegetarian ?',
+                'label' => 'form.vegetarian',
+                'translation_domain' => 'searchCategoryForm',
                 'required' => false
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
