@@ -58,7 +58,7 @@
 
                     {% if app.user %}
                         <div class="mb-4">
-                            <h3>{{ 'rate.yourRating'|trans({}, 'fillerWords') }}</h3>
+                            <h3>{{ 'rate.your_rating'|trans({}, 'fillerWords') }}</h3>
                             {{ star.renderStars(userRating) }}
                         </div>
                         <div class="mb-4">
@@ -76,9 +76,9 @@
                         </div>
                     {% else %}
                         <div class="mb-4">
-                            <h3>{{ 'rate.yourRating'|trans({}, 'fillerWords') }}</h3>
+                            <h3>{{ 'rate.your_rating'|trans({}, 'fillerWords') }}</h3>
                             <p class="fst-italic text-gray">
-                                {{ 'comment.connectionNeeded'|trans({}, 'fillerWords') }}
+                                {{ 'comment.connection_needed'|trans({}, 'fillerWords') }}
                             </p>
                         </div>
                     {% endif %}
@@ -97,7 +97,7 @@
 
         <div class="row mt-5">
             <div class="col-12">
-                <h3 class="text-decoration-underline text-primary">{{ 'comment.allComments'|trans({}, 'fillerWords') }} {{ recipe.name|default('') }}</h3>
+                <h3 class="text-decoration-underline text-primary">{{ 'comment.all_comments'|trans({}, 'fillerWords') }} {{ recipe.name|default('') }}</h3>
                 {% if app.user %}
                     <div class="mt-3">
                         <h4 class="text-secondary">{{ 'comment.write'|trans({}, 'fillerWords') }}</h4>
@@ -106,7 +106,7 @@
                             {{ form_widget(form.content, {'attr': {'class': 'form-control', 'style': 'height: 130px;' }}) }}
                             {{ form_label(form.content) }}
                         </div>
-                        <button class="btn btn-lg btn-dark mt-3" type="submit" id="button-addon2">{{ 'comment.sendComment'|trans({}, 'fillerWords') }}</button>
+                        <button class="btn btn-lg btn-dark mt-3" type="submit" id="button-addon2">{{ 'comment.send_comment'|trans({}, 'fillerWords') }}</button>
                         {{ form_end(form) }}
                     </div>
                 {% else %}
@@ -118,7 +118,7 @@
                 <div class="mt-5">
                     {% if recipe.comments|length == 0 %}
                         <div class="text-center text-gray mt-5">
-                            <h4>{{ 'comment.noComment'|trans({}, 'fillerWords') }}</h4>
+                            <h4>{{ 'comment.no_comment'|trans({}, 'fillerWords') }}</h4>
                         </div>
                     {% endif %}
                     {% for commentIndex, comment in recipe.comments %}
@@ -129,7 +129,7 @@
         </div>
 
         <div class="row mt-5">
-            <h3>{{ 'comment.otherRecipe'|trans({}, 'fillerWords') }}</h3>
+            <h3>{{ 'show.other_recipe'|trans({}, 'fillerWords') }}</h3>
             {{ render(controller('App\\Controller\\Recipes\\RecipeController::renderRecommendedRecipes')) }}
         </div>
     </div>
