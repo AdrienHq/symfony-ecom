@@ -2,6 +2,7 @@
 
 namespace App\Form\category;
 
+use AllowDynamicProperties;
 use App\Data\category\SearchDataCategory;
 use App\Entity\Course;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+#[AllowDynamicProperties]
 class SearchFormCategory extends AbstractType
 {
     public function __construct(TranslatorInterface $translator)
