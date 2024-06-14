@@ -7,10 +7,17 @@
     <div class="card-body d-flex flex-column">
         <h2 class="card-title">{{ recipe.name|default("") }}</h2>
         <div class="card-duration" style="font-size: 1.5rem; color: firebrick;">
-            {% if (recipe.duration // 60) > 0 %}
-                {{ (recipe.duration // 60) ~ ' hour ' }}
+            {% set hours = recipe.duration // 60 %}
+            {% set minutes = recipe.duration % 60 %}
+
+            {% if hours > 0 %}
+                {{ hours ~ ' ' ~ 'hour'|trans({}, 'fillerWords') }}
+                {% if minutes > 0 %}
+                    {{ ' ' ~ minutes ~ ' ' ~ 'minute'|trans({}, 'fillerWords') }}
+                {% endif %}
+            {% else %}
+                {{ minutes ~ ' ' ~ 'minute'|trans({}, 'fillerWords') }}
             {% endif %}
-            {{ (recipe.duration % 60) ~ ' minutes' }}
         </div>
         <p class="card-text mt-3">
             {{ recipe.description|default("")|slice(0, 120) }}{% if recipe.description|length > 120 %}...{% endif %}
@@ -22,7 +29,7 @@
         </div>
         <div class="mt-auto border-top text-end pt-3" style="background: none;">
             <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="btn btn-primary">
-                Lire la suite
+                {{ 'read_more'|trans({}, 'fillerWords') }}
             </a>
         </div>
     </div>
