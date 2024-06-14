@@ -1,3 +1,20 @@
 read_more: "Read More"
 hour: " hour "
 minute: " minutes "
+print: "Print the recipe"
+
+show:
+  course: "Course type"
+  duration: "Duration"
+  rating: "Overall rating"
+  yourRating: "Your rating"
+  ingredients: "Ingredients"
+
+comment:
+  connectionNeeded: "You need to be connected to be able to rate a recipe!"
+  allComments: "All the comments for the recipe "
+  write: "Write us a feedback :)"
+  sendComment: "Send"
+  signin: "Sign-in or connect to be able to leave a comment ! :)"
+  noComment: "No comments for the moment :("
+  otherRecipe: "Other recipes that may interest you?"
