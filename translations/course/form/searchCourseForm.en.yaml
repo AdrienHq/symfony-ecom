@@ -1,0 +1,5 @@
+form:
+  search: "Search"
+  max_duration_placeholder: "Maximum"
+  min_duration_placeholder: "Minimum"
+  vegetarian: "Vegetarian results only"
