@@ -14,7 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[AllowDynamicProperties] class SearchFormCourse extends AbstractType
+#[AllowDynamicProperties]
+class SearchFormCourse extends AbstractType
 {
     public function __construct(TranslatorInterface $translator)
     {
