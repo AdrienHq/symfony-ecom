@@ -7,18 +7,20 @@ show:
   course: "Course type"
   duration: "Duration"
   ingredients: "Ingredients"
+  other_recipe: "Other recipes that may interest you?"
 
 rate:
   rating: "Overall rating"
-  yourRating: "Your rating"
-  rateIt: "Rate it ?"
+  your_rating: "Your rating"
+  rate_it: "Rate it ?"
   rate: "Rate !"
 
 comment:
-  connectionNeeded: "You need to be connected to be able to rate a recipe!"
-  allComments: "All the comments for the recipe "
+  connection_needed: "You need to be connected to be able to rate a recipe!"
+  all_comments: "All the comments for the recipe "
   write: "Write us a feedback :)"
-  sendComment: "Send"
+  send_comment: "Send"
   signin: "Sign-in or connect to be able to leave a comment ! :)"
-  noComment: "No comments for the moment :("
-  otherRecipe: "Other recipes that may interest you?"
+  no_comment: "No comments for the moment :("
+  your_comment: "Your comment"
+  leave_comment: "Leave a comment here"

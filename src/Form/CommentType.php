@@ -2,28 +2,31 @@
 
 namespace App\Form;
 
-use App\DTO\ContactDTO;
-use App\Entity\Comment;
-use App\Entity\Rating;
+use AllowDynamicProperties;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
+#[AllowDynamicProperties]
 class CommentType extends AbstractType
 {
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('content', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Leave a comment here',
+                    'placeholder' => $this->translator->trans('comment.leave_comment', [], 'fillerWords'),
                     'id' => 'floatingTextarea'
                 ],
-                'label' => 'Your comment',
+                'label' => 'comment.your_comment',
+                'translation_domain' => 'fillerWords',
                 'label_attr' => ['for' => 'floatingTextarea'],
             ]);
 
