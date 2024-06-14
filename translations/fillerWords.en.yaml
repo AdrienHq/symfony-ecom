@@ -6,9 +6,13 @@ print: "Print the recipe"
 show:
   course: "Course type"
   duration: "Duration"
+  ingredients: "Ingredients"
+
+rate:
   rating: "Overall rating"
   yourRating: "Your rating"
-  ingredients: "Ingredients"
+  rateIt: "Rate it ?"
+  rate: "Rate !"
 
 comment:
   connectionNeeded: "You need to be connected to be able to rate a recipe!"
