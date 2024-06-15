@@ -21,7 +21,7 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('$articleThumbnailFile', FileType::class, [
+            ->add('articleThumbnailFile', FileType::class, [
                 'required' => false,
             ])
             ->add('title', TextType::class, [
