@@ -1,6 +1,6 @@
 recipeForm:
   name: 'Recipe Name'
-  thumbnailFile: 'Thumbnail iamge'
+  thumbnailFile: 'Thumbnail image'
   description: 'Description'
   questions: 'Question ?'
   duration: 'How much the recipe will take to make ? (in minutes)'
