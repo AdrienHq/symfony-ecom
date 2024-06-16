@@ -22,20 +22,28 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('articleThumbnailFile', FileType::class, [
+                'label' => 'articleForm.thumbnail',
+                'translation_domain' => 'articleForm',
                 'required' => false,
             ])
             ->add('title', TextType::class, [
-                'label' => 'Title'
+                'label' => 'articleForm.name',
+                'translation_domain' => 'articleForm'
             ])
             ->add('content', TextareaType::class, [
+                'label' => 'articleForm.content',
+                'translation_domain' => 'articleForm',
                 'required' => false,
                 'empty_data' => ''
             ])
             ->add('slug', TextType::class, [
+                'label' => 'articleForm.slug',
+                'translation_domain' => 'articleForm',
                 'required' => false
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Save'
+                'label' => 'articleForm.save',
+                'translation_domain' => 'articleForm',
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->slugCompletion(...))
             ->addEventListener(FormEvents::POST_SUBMIT, $this->timeStampGenerator(...));

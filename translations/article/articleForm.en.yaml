@@ -1,0 +1,6 @@
+articleForm:
+  name: "Title"
+  thumbnail: "Article thumbnail"
+  content: "Content"
+  slug: "Slug"
+  save: "Save"
