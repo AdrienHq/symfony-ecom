@@ -22,7 +22,7 @@
                 <div class="carousel-caption">
                     <h3>{{ recipe.name }}</h3>
                     <a href="{{ path('recipe.detail', {id: recipe.id, slug: recipe.slug } ) }}" class="mt-8" style="text-decoration: none; color: whitesmoke;">
-                        Lire la suite
+                        {{ 'read_more'|trans({}, 'fillerWords') }}
                     </a>
                 </div>
             </div>
