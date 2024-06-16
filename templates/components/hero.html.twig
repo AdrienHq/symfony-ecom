@@ -2,33 +2,29 @@
     <main role="main" class="container">
         <div class="row">
             <h2 class="blog-post-title mt-5 mb-5 text-center" style="font-size: 45px;">
-                Hey! Welcome to my cooking website!
+                {{ 'welcome_message'|trans({}, 'hero') }}
             </h2>
             <div class="col-md-8 blog-main mt-4">
                 <div class="blog-post">
                     {% include '/components/carousel.html.twig'  with {recipes : recipes} only %}
                     <p class="blog-post-meta"></p>
-                    <p>I enjoy cooking and coding...</p>
+                    <p>{{ 'paragraph_1'|trans({}, 'hero') }}</p>
                     <hr>
-                    <p>This website provided an opportunity for me to enhance my development skills and keep them
-                        up-to-date.</p>
-                    <p>You'll find some of my favorite recipes here. I often find myself forgetting recipes that I love
-                        or lacking inspiration for dinner.
-                        This website serves primarily as an archive and resource guide for those who feel lost when
-                        mealtime approaches.</p>
-                    <p>I hope it will be helpful to some of you :)</p>
+                    <p>{{ 'paragraph_2'|trans({}, 'hero') }}</p>
+                    <p>{{ 'paragraph_3'|trans({}, 'hero') }}</p>
+                    <p>{{ 'paragraph_4'|trans({}, 'hero') }}</p>
                 </div>
                 <div class="mt-5">
-                    <h4 class="font-italic">Elsewhere</h4>
+                    <h4 class="font-italic">{{ 'title_1'|trans({}, 'hero') }}</h4>
                     <ol class="list-unstyled">
-                        <li><a href="https://github.com/AdrienHq">GitHub</a></li>
-                        <li><a href="https://www.instagram.com/adrienhecq/?hl=fr">Instagram</a></li>
+                        <li><a href="https://github.com/AdrienHq">{{ 'link_1'|trans({}, 'hero') }}</a></li>
+                        <li><a href="https://www.instagram.com/adrienhecq/?hl=fr">{{ 'link_2'|trans({}, 'hero') }}</a></li>
                     </ol>
                 </div>
             </div>
 
             <aside class="col-md-4 blog-sidebar mt-4 p-3">
-                <h3 class="font-weight-bold mb-4">Most Popular Recipes</h3>
+                <h3 class="font-weight-bold mb-4">{{ 'title_2'|trans({}, 'hero') }}</h3>
                 {% for recipe in popularRecipes %}
                     <div class="p-3 mb-3 recipe-card">
                         <div class="row no-gutters">
