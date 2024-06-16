@@ -11,7 +11,7 @@
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
                 <button type="submit" class="p-1 m-2 btn btn-danger">
-                    Delete
+                    {{ 'delete'|trans({}, 'comment') }}
                 </button>
             </form>
         </div>
@@ -28,7 +28,7 @@
         <div class="col-sm-9"><p>{{ comment.content }}</p></div>
         <div class="col-sm-9">
             <p class="" style="color: grey">
-                Posted at : {{ comment.publishedAt|date("d-m-Y H:i:s") }}
+                {{ 'posted_at'|trans({}, 'comment') }}{{ comment.publishedAt|date("d-m-Y H:i:s") }}
             </p>
         </div>
     </div>
