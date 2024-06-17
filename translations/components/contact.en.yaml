@@ -2,3 +2,12 @@ name: "Name"
 email: "Email"
 message: "Your message :"
 send: "Send"
+
+page:
+  title_1: "Contact me"
+  title_2: "For more professional inquiries, I direct you to my LinkedIn profile. I'm always available to connect and discuss any professional matters you may have. Looking forward to connecting with you on LinkedIn!"
+  paragraph_1: "                Please don't hesitate to get in touch if you have any questions or need assistance. Your feedback is
+                invaluable to me, so I welcome any comments or suggestions you may have. Whether it's about improving
+                the website or discussing new features, I'm here to listen and help."
+  paragraph_2: "Feel free to reach out anytime – I'm always eager to hear from you!"
+  name: "Adrien Hecq"
