@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="pt-3 pb-5 text-center mt-40" style="font-size: 45px;">Our recipes for the {{ course.name }}</h1>
+        <h1 class="pt-3 pb-5 text-center mt-40" style="font-size: 45px;">{{ 'title'|trans({}, 'listCourse') }}{{ course.name }}</h1>
         <div class="row">
             <div class="col-md-3">
                 {% include '/course/_filter.html.twig' with {form: form } only %}
