@@ -1,9 +1,9 @@
 {{ form_start(form, {attr: {class: 'filter'}}) }}
 {{ form_row(form.q) }}
 
-<h4>Ingredients</h4>
+<h4>{{ 'filter.ingredients'|trans({}, 'fillerWords') }}</h4>
 {{ form_row(form.category) }}
-<h4>Preparation time</h4>
+<h4>{{ 'filter.prep_time'|trans({}, 'fillerWords') }}</h4>
 <div class="row">
     <div class="col-md-6">
         {{ form_row(form.minDuration) }}
@@ -13,9 +13,9 @@
     </div>
 </div>
 
-<h4>Vegetarian ?</h4>
+<h4>{{ 'filter.vege'|trans({}, 'fillerWords') }}</h4>
 {{ form_row(form.vegetarian) }}
 
-<button type="submit" class="btn btn-success w-100">Filter</button>
+<button type="submit" class="btn btn-success w-100">{{ 'filter.filter'|trans({}, 'fillerWords') }}</button>
 
 {{ form_end(form) }}
