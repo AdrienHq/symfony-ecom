@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\Recipes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
