@@ -15,6 +15,13 @@ rate:
   rate_it: "Rate it ?"
   rate: "Rate !"
 
+filter:
+  prep_time: "Preparation time"
+  course: "Course"
+  vege: "Vegetarian ?"
+  ingredients: "Ingredients"
+  filter: "Search"
+
 comment:
   connection_needed: "You need to be connected to be able to rate a recipe!"
   all_comments: "All the comments for the recipe "
