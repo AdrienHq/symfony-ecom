@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -18,9 +19,17 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
-            ->add('email')
+            ->add('username', TextType::class, [
+                'label' => 'username',
+                'translation_domain' => 'registrationForm',
+            ])
+            ->add('email', TextType::class, [
+                'label' => 'email',
+                'translation_domain' => 'registrationForm',
+            ])
             ->add('plainPassword', PasswordType::class, [
+                'label' => 'password',
+                'translation_domain' => 'registrationForm',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -38,6 +47,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'check_box',
+                'translation_domain' => 'registrationForm',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -46,7 +57,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Register'
+                'label' => 'register',
+                'translation_domain' => 'registrationForm',
             ]);
     }
 
